@@ -1,0 +1,62 @@
+body {
+  background-color: #699B99;
+  font-family: 'Oswald', sans-serif;
+  height: 100%;
+  width: 100%;
+  
+}
+#app-name {
+  color: #FFFFFF;
+  font-size: 12em;
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
+  padding-top: 20%;
+
+}
+
+.spacer {
+  height: 30px;
+  width: 100%;
+  position: relative;
+ 
+}
+
+
+/* Buttons styles */
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+
+.ghost
+{
+  /*-webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);*/
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  color:#ffffff;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  border:0.15em solid #fff;
+  padding:0.4em 0.6em;
+  -webkit-transition: color 0.3s, border-color 0.3s ease-out;
+  transition: color 0.3s, border-color 0.3s ease-out;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ghost:hover,
+.ghost:active {
+  color: #000;
+  border-color: #000;
+  transition: color 0.3s ease-in,
+              border-color 0.3s ease-in ;
+}
+  
+
