@@ -1,0 +1,40 @@
+body {
+margin: 0 auto;
+padding: 0;
+text-align: center;
+}
+.upload-panel {
+background: #155F9E;
+background-size: 90% 90%;
+height: 300px;
+display: none;
+font-family: garamond, times-new-roman, serif;
+}
+.upload-panel p {
+text-align: center;
+color: white;
+}
+.slide {
+margin: 0;
+padding: 0;
+border-top: solid 2px #0D395E;
+}
+.pull-me {
+display: block;
+position: relative;
+right: -125px;
+width: 150px;
+height: 20px;
+font-family: arial, sans-serif;
+font-size: 14px;
+color: #ffffff;
+background: #0A2B4A;
+text-decoration: none;
+-moz-border-bottom-left-radius: 5px;
+-moz-border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+.pull-me p {
+text-align: center;
+}

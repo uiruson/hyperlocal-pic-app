@@ -1,19 +1,88 @@
-<div id="landing" class="container">
-  <div class="row">
-    <span id="app-name"> HYPERLOCAL</span>
-  </div>
-  <!--<div class="row" style="background-color: yellow">-->
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4" style="text-align: center">
-        <!--<button type="button" class="btn btn-default test">Try as a Guest</button>-->
-      <a class="ghost" href="#">Try as a Guest</a>
+<div id="first-page" style="">
+<!-- TOP NAVBAR WITH BUTTON FOR SLIDING PANEL-->
+  <nav class="navbar navbar-default" style="background-color: #699B99; border: none" role="navigation">
+    <div class="container-fluid">
+      <a class="navbar-brand"  href="#" style="float: right" >
+        <button type="submit" class="btn btn-default" name="" style="background-color: #699B99; border: none; ">
+          <span id="right-panel-link" href= "#right-panel"  class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: yellow; font-size: 1.5em"></span>
+        </button>
+      </a>
     </div>
-    <div class="col-md-4"></div>
+  </nav>
+
+  <!---BEGINNING OF RIGHT SLIDING PANEL FOR LOGIN/REGISTER-->
+  <div id="right-panel" class="panel">
+    <button id="register-button" style="width: 100%">
+      <a><em><span href="#" id="register" style="text-decoration: none; color: yellow">New user? Register</span></em></a>
+    </button>
+
+    <form id="right-panel-login" >
+      <div class="form-group">
+        <label>USERNAME</label>
+        <input type="text" class="form-control" id="username" placeholder="Username" value="">
+      </div>
+      <div class="form-group">
+        <label>PASSWORD</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" value="">
+      </div>
+    <button type="submit" id="login-button" class="ghost side-button" style="background-color: #000; width: 100%">Login</button>   
+    </form>
+
+    <form id="right-panel-register" style="" >
+      <div class="form-group">
+        <label>USERNAME</label>
+        <input type="text" class="form-control" id="username" placeholder="Username" value="">
+      </div>
+      <div class="form-group">
+        <label>EMAIL</label>
+        <input type="email" class="form-control" id="email" placeholder="Email" value="">
+      </div>
+      <div class="form-group">
+        <label>PASSWORD</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" value="">
+      </div>
+      <button type="submit" class="ghost side-button"style="background-color: #000; width: 100%">SIGN UP</button>   
+    </form>
   </div>
-  <div class="row">
-  <div class="row">
-  <div class="row">
-  <div class="row">
-  <div class="row">
-</div>
+
+  <!--LANDING PAGE -->
+  <div id="landing" class="container">
+    <div class="row">
+      <span id="app-name">HYPERLOCAL</span>
+    </div>
+    <div class="row">
+      <div class="col-md-4"> </div>
+      <div class="col-md-4" style="text-align: center">
+        <a class="ghost" id="enter" href="#">Try as a Guest</a>
+      </div>
+      <div class="col-md-4"> </div>
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+  </div>
+</div> <!--END OF THE FIRST PAGE-->
+
+
+<!-- SECOND VIEW AFTER LOGIN -TOP NAVBAR WITH BUTTONS TO UPLOAD PICTURES AND LOG OUT-->
+<div id="second-page" style="background-color: #699B99; width: 100%" >
+  <nav class="navbar navbar-default" style="border: none; background-color: #699B99" role="navigation">
+    <div class="container-fluid">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="width: 100%">
+        <ul class="nav navbar-nav navbar-right" style="background-color: #699B99">
+          <li><p class="slide"><a href="#" class="pull-me">Upload pictures</a></p></li>
+          <li><a href="#">Sign out</a></li>
+        </ul> <!-- END OF NAVBAR RIGHT -->
+      </div> <!-- end of navbar collapse-->
+    </div> 
+  </nav><!--END OF NAVBAR-->
+
+  <!-- UPPER PANEL FOR PICTURE UPLOADING -->
+  <div class="upload-panel">
+    <p> testing upload panel</p>
+  </div>
+</div><!--END OF SECOND PAGE-->
+
