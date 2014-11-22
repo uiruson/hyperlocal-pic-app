@@ -7,6 +7,7 @@ require 'active_support/all'
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'pry'
+require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
@@ -24,6 +25,7 @@ configure do
   set :instagram_secret, secrets['instagram']['secret']
 
   set :views, File.join(Sinatra::Application.root, "app", "views")
+  Sinatra::register Gon::Sinatra
 end
 
 # Set up the database and models
