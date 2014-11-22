@@ -3,8 +3,10 @@ body {
   font-family: 'Oswald', sans-serif;
   height: 100%;
   width: 100%;
+  overflow: hidden;
   
 }
+
 #app-name {
   color: #FFFFFF;
   font-size: 12em;
@@ -15,14 +17,6 @@ body {
   padding-top: 20%;
 
 }
-
-.spacer {
-  height: 30px;
-  width: 100%;
-  position: relative;
- 
-}
-
 
 /* Buttons styles */
 input::-moz-focus-inner,
@@ -51,12 +45,68 @@ button::-moz-focus-inner {
   margin-left: auto;
 }
 
-.ghost:hover,
-.ghost:active {
+#enter.ghost:hover,
+#enter.ghost:active {
   color: #000;
   border-color: #000;
   transition: color 0.3s ease-in,
-              border-color 0.3s ease-in ;
+              border-color 0.3s ease-in;
 }
-  
+.ghost.side-button:hover,
+.ghost.side-button:active {
+  color: #f0f20b;
+  border-color: #f0f20b;
+  transition: color 0.3s ease-in,
+              border-color 0.3s ease-in;
+}
 
+.panel {
+  display: none;
+  width: 220px;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+/* set the registration form in the side panel invisible*/
+/*#right-panel-register {
+  display: none
+}*/
+
+#register-button {
+  color: #000 !important;
+  background-color: #000 !important;
+  border: none;
+}
+
+/* ===============  SLIDE DOWN CSS ===================== */
+.upload-panel p {
+text-align: center;
+color: white;
+}
+.slide {
+margin: 0;
+padding: 0;
+border-top: solid 2px #0D395E;
+}
+.pull-me {
+display: block;
+position: relative;
+right: -125px;
+width: 150px;
+height: 20px;
+font-family: arial, sans-serif;
+font-size: 14px;
+color: #ffffff;
+background: #0A2B4A;
+text-decoration: none;
+-moz-border-bottom-left-radius: 5px;
+-moz-border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+.pull-me p {
+text-align: center;
+}
+/*=====================*/
+  
