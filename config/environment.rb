@@ -1,13 +1,17 @@
 require 'rubygems'
 require 'bundler/setup'
-require 'RMagick' 
+
 require 'active_support/all'
 
 # Load Sinatra Framework (with AR)
 require 'sinatra'
 require 'sinatra/activerecord'
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2d3afbebd8d34527843926144db2c6f6b4e07bb
 require 'pry'
+require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
@@ -25,6 +29,7 @@ configure do
   set :instagram_secret, secrets['instagram']['secret']
   
   set :views, File.join(Sinatra::Application.root, "app", "views")
+  Sinatra::register Gon::Sinatra
 end
 
 # Set up the database and models
