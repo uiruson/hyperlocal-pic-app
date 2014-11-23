@@ -1,0 +1,56 @@
+<header>
+  <h1>HyperLocal</h1> 
+</header>
+
+<div class="container">
+  <div class="row">
+    <h2>I'm BODY</h2>
+  </div>
+</div>
+
+
+
+<form method = "post" action = "/signup">
+  
+    <div>
+      <h3>Sign Up</h3>
+      <label>Enter Username</label>
+      <input type ="text" name ="username">
+      <label>Enter Password</label>
+      <input type ="password" name="password">
+      <input type ="submit" name="submit">
+      
+    </div>
+</form>
+
+<form method = "post" action = "/login">
+  
+    <div>
+      <h3>Login</h3>
+      <label>Enter Username</label>
+      <input type = "text" name ="username">
+      <label>Enter Password</label>
+      <input type = "password" name= "password">
+      <input type = "submit" name="submit">
+    </div>
+</form>
+
+
+
+<header>
+  <h1> File uploader!</h1>
+  <form method="post" enctype="multipart/form-data" action='/upload'>
+    <input type="file" name="myfile">
+    <input type="submit" value="upload">
+  </form>
+</header>
+
+
+<footer>
+  
+</footer>
+<div>
+<% if @current_user %>
+    <h5>Current User: <%= @current_user.username %></h5>
+<% end %>
+</div>
