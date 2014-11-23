@@ -6,10 +6,10 @@ require 'active_support/all'
 # Load Sinatra Framework (with AR)
 require 'sinatra'
 require 'sinatra/activerecord'
-<<<<<<< HEAD
 
-=======
->>>>>>> e2d3afbebd8d34527843926144db2c6f6b4e07bb
+
+
+
 require 'pry'
 require 'gon-sinatra'
 

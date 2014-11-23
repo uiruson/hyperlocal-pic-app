@@ -2,12 +2,8 @@ require 'pry'
 require 'exifr'
 require 'instagram'
 require 'geo-distance'
-<<<<<<< HEAD
-require 'mini_magick'
-=======
 require 'gon-sinatra'
 require 'json'
->>>>>>> e2d3afbebd8d34527843926144db2c6f6b4e07bb
 
 enable :sessions
 
