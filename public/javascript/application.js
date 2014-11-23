@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-$(document).ready(function(){
+$(function() {
 
   // second page should be invisible at the beginning
   // $('#second-page').css({display : "none"});
@@ -58,8 +57,8 @@ $(document).ready(function(){
   // $('.placeholder').on('click', function(){
   //   console.log("clicked on picture");
   // });
-=======
-$(function() {
+
+
   $.getJSON( 'javascript/location.json', function(data) { 
     $('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(data.origins[0].latitude, data.origins[0].longitude), 
       'bounds':true});
@@ -93,7 +92,6 @@ $(function() {
       });
     });
   });    
->>>>>>> 39aaddaabc5bbdb2540d385da54fb5e95037f448
 });
 
 

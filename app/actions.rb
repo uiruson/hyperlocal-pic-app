@@ -81,23 +81,24 @@ post '/upload' do
         longitude: @longitude
       )
       # binding.pry
-      redirect'/instagram_images'
+      # redirect'/instagram_images'
     else
       return "Sorry, try taking a picture with your location turned on!"
     end
   else
     return "you need to upload a jpeg"
   end
+  erb :index
 end
 
 get '/instagram_images' do
   @pic_latitude = Picture.last[:latitude]
   @pic_longitude = Picture.last[:longitude]
-  @recent_pic_upload = Picture.last
-  @secondlast_upload = Picture.all[-2]
-  @thirdlast_upload = Picture.all[-3]
-  @fourthlast_upload = Picture.all[-4]
-  @fifthlast_upload = Picture.all[-5]
+  @recent_pic_upload = Picture.last[:photo_path]
+  @secondlast_upload = Picture.all[-2][:photo_path]
+  @thirdlast_upload = Picture.all[-3][:photo_path]
+  @fourthlast_upload = Picture.all[-4][:photo_path]
+  # @fifthlast_upload = Picture.all[-5]
 
   # binding.pry
 
@@ -115,8 +116,8 @@ get '/instagram_images' do
   @html << "<div class='container'><div class='row'>"
   #distance 10 = 10meter, 1000 = 1km
   # binding.pry
-  @html_pic_display = "<h1>Last 5 Uploads</h1>"
-  @html_pic_display << "<img src ='#{@recent_pic_upload.photo_path}'/> <img src ='#{@secondlast_upload.photo_path}'/> <img src ='#{@thirdlast_upload.photo_path}'/> <img src ='#{@fourthlast_upload.photo_path}'/> <img src ='#{@fifthlast_upload.photo_path}'/>"
+  # @html_pic_display = "<h1>Last 5 Uploads</h1>"
+  # @html_pic_display << "<img src ='#{@recent_pic_upload.photo_path}'/> <img src ='#{@secondlast_upload.photo_path}'/> <img src ='#{@thirdlast_upload.photo_path}'/> <img src ='#{@fourthlast_upload.photo_path}'/> <img src ='#{@fifthlast_upload.photo_path}'/>"
   @descending_location = []
   geolocationHash = {}
   origin = {}

@@ -37,15 +37,15 @@ require APP_ROOT.join('config', 'database')
 
 # db = URI.parse('postgres://vagrant@localhost:5432/hyperlocal')
 
-ActiveRecord::Base.establish_connection(
-  :adapter  => 'postgresql',#? 'postgresql' : db.scheme,
-  :host     => 'localhost',
-  :username => 'hyperlocal',
-  :password => 'hyperlocal',
-  :database => 'hyperlocal',
-  :encoding => 'utf8',
-  :port => 5432
-)
+# ActiveRecord::Base.establish_connection(
+  # :adapter  => 'postgresql',#? 'postgresql' : db.scheme,
+  # :host     => 'localhost',
+  # :username => 'hyperlocal',
+  # :password => 'hyperlocal',
+  # :database => 'hyperlocal',
+  # :encoding => 'utf8',
+  # :port => 5432
+# )
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
 
