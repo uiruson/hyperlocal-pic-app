@@ -1,11 +1,9 @@
-<<<<<<< HEAD
+
 body {
   background-color: #699B99;
   font-family: 'Oswald', sans-serif;
   height: 100%;
   width: 100%;
-  margin-left: 0px !important;
-  overflow: hidden;
   
 }
 
@@ -131,8 +129,8 @@ button::-moz-focus-inner {
 #second-page {
   display: none;
   background-color: #699B99;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 }
 
 /* SECOND PAGE NAVBAR*/
@@ -212,4 +210,4 @@ html, body , #map-canvas {
   padding: 5px;
   border: 1px solid #999;
 }
->>>>>>> 39aaddaabc5bbdb2540d385da54fb5e95037f448
+
