@@ -13,7 +13,6 @@ gem 'tux'
 gem 'instagram'
 gem 'exifr'
 gem 'geo-distance'
-gem 'rmagick'
 gem 'gon-sinatra'
 gem 'json'
 
