@@ -1,11 +1,11 @@
-<<<<<<< HEAD
 body {
   background-color: #699B99;
   font-family: 'Oswald', sans-serif;
   height: 100%;
   width: 100%;
-  margin-left: 0px !important;
-  overflow: hidden;
+  margin: auto;
+/*  margin-left: 0px !important;
+  overflow: hidden;*/
   
 }
 
@@ -188,19 +188,11 @@ button::-moz-focus-inner {
   border-width: 2px
 }
 
-
-
-
-
-  
-=======
-
-
-html, body , #map-canvas {
+/*#map-canvas {
   height: 100%;
   margin: 0px;
   padding: 0px
-}
+}*/
 
 #panel {
   position: absolute;
@@ -212,4 +204,3 @@ html, body , #map-canvas {
   padding: 5px;
   border: 1px solid #999;
 }
->>>>>>> 39aaddaabc5bbdb2540d385da54fb5e95037f448

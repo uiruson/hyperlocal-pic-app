@@ -1,3 +1,4 @@
+<div id="map_canvas" style="width:100%; height: 500px"></div>
 
 <div id="first-page" style="">
 <!-- TOP NAVBAR WITH BUTTON FOR SLIDING PANEL-->
@@ -65,7 +66,6 @@
 
 <!-- SECOND VIEW AFTER LOGIN -->
 <div id="second-page" >
-
   <!--TOP NAVBAR WITH BUTTONS TO UPLOAD PICTURES AND LOG OUT-->
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
@@ -128,9 +128,12 @@
   </div><!--END OF THE USER'S PICTURE CONTAINER-->
 
   <!-- MAP-->
+
+      
+
   <div class="container">
     <div class="row">
-      <div id="map_canvas" style="width:100%; height: 500px"></div>
+      <%= @html %>
     </div>
   </div>
   <!--coming from the backend-->
@@ -140,7 +143,6 @@
 
 
 </div><!--END OF SECOND PAGE-->
-
 
 
 
