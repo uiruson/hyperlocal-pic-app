@@ -81,7 +81,7 @@ post '/upload' do
         longitude: @longitude
       )
       # binding.pry
-      # redirect'/instagram_images'
+      redirect'/instagram_images'
     else
       return "Sorry, try taking a picture with your location turned on!"
     end
