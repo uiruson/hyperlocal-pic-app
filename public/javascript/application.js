@@ -2,26 +2,34 @@ $(function() {
 
   // second page should be invisible at the beginning
   // $('#second-page').css({display : "none"});
+<<<<<<< HEAD
   $('#right-panel-register').css({display : "none"});
+=======
+ $('#right-panel-register').css({display : "none"});
+>>>>>>> 193bb8184a594423d773904745b3b176b19ae896
 
   // clicking on the arrow makes the side panel visible
   // $('#right-panel-link').on('click', function(){
   //   console.log("clicked the arrow");
   // });
-  $('#right-panel-link').panelslider({side: 'right', clickClose: false, duration: 200 });
+  $('#right-panel-link').panelslider({side: 'right', clickClose: false, duration: 500 });
+
 
   //clicking on register in the side panel shows the registration form
   // and makes the login form disappear
   $('#register').on('click', function(){
     $('#register-button').hide();
     $('#right-panel-login').css({display : "none"});
-    $('#right-panel-register').css({display : "block"});
   })
 
 
   // // SECOND PAGE
   // //clicking on the loggin button makes the second page visible
+<<<<<<< HEAD
   $('#login-button').on('click', function(){
+=======
+  $('#login-button').click(function() {
+>>>>>>> 193bb8184a594423d773904745b3b176b19ae896
     $.panelslider.close();
     $('#first-page').hide();
     $('#second-page').show();
@@ -55,7 +63,11 @@ $(function() {
   // $('.placeholder').on('click', function(){
   //   console.log("clicked on picture");
   // });
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 193bb8184a594423d773904745b3b176b19ae896
 });
 
 

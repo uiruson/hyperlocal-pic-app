@@ -23,7 +23,7 @@ configure do
   secrets = YAML.load_file( File.join(Sinatra::Application.root, 'config', 'secrets.yml') )
   set :instagram_id, secrets['instagram']['id']
   set :instagram_secret, secrets['instagram']['secret']
-  
+
   set :views, File.join(Sinatra::Application.root, "app", "views")
   Sinatra::register Gon::Sinatra
 end
