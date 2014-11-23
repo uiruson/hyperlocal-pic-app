@@ -17,10 +17,10 @@ end
 
 # Homepage (Root path)
 get '/' do
- erb :index
-end
+#  erb :index
+# end
 
-get '/instagram_images' do
+# get '/instagram_images' do
   Instagram.configure do |config|
     config.client_id = settings.instagram_id
     config.client_secret = settings.instagram_secret
@@ -41,14 +41,18 @@ get '/instagram_images' do
   geolocationHash[:origins] = []
   geolocationHash[:origins].push(origin)
   geolocationHash[:markers] = []
+  geolocationHash[:images] = []
   for media_item in Instagram.media_search(lat1, lon1, {:count => 20, :distance => 100, :MIN_TIMESTAMP => 1})
     lat2 = media_item.location.latitude
     lon2 = media_item.location.longitude
 
-    temphash = {}
-    temphash["latitude"] = lat2
-    temphash["longitude"] = lon2
-    geolocationHash[:markers].push(temphash)
+    latlonghash = {}
+    latlonghash["latitude"] = lat2
+    latlonghash["longitude"] = lon2
+    geolocationHash[:markers].push(latlonghash)
+    imagehash = {}
+    imagehash["src"] = "#{media_item.images.thumbnail.url}"
+    geolocationHash[:images].push(imagehash)
     dist = GeoDistance::Haversine.distance( lat1.to_f, lon1.to_f, lat2.to_f, lon2.to_f ).meters.number
 
     @html << "<div class='col-md-2'>Distance: #{(dist/1000).round(2)}km<br/><br/>lat = #{lat2.to_f}, lon = #{lon2.to_f}<br/><br/>
@@ -61,7 +65,7 @@ get '/instagram_images' do
     f.write(geolocationHash.to_json)
     f.close
   end
-  #erb :index
+  erb :index
 end
 
 
