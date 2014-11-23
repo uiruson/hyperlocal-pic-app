@@ -37,10 +37,7 @@ GEM
       faraday_middleware (>= 0.8, < 0.10)
       hashie (>= 0.4.0)
       multi_json (~> 1.0, >= 1.0.3)
-<<<<<<< HEAD
-=======
     json (1.8.1)
->>>>>>> e2d3afbebd8d34527843926144db2c6f6b4e07bb
     method_source (0.8.2)
     mini_magick (4.0.0)
     minitest (4.7.5)
@@ -104,11 +101,8 @@ DEPENDENCIES
   geo-distance
   gon-sinatra
   instagram
-<<<<<<< HEAD
-  mini_magick
-=======
   json
->>>>>>> e2d3afbebd8d34527843926144db2c6f6b4e07bb
+  mini_magick
   pg
   pry
   puma

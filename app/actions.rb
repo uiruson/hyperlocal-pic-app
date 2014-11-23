@@ -41,7 +41,7 @@ get '/' do
   geolocationHash[:origins].push(origin)
   geolocationHash[:markers] = []
   geolocationHash[:images] = []
-  for media_item in Instagram.media_search(lat1, lon1, {:count => 20, :distance => 100, :MIN_TIMESTAMP => 1})
+  for media_item in Instagram.media_search(lat1, lon1, {:count => 20, :distance => 150, :MAX_TIMESTAMP => 1})
     lat2 = media_item.location.latitude
     lon2 = media_item.location.longitude
 
