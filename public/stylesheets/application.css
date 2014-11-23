@@ -188,12 +188,6 @@ button::-moz-focus-inner {
   border-width: 2px
 }
 
-/*#map-canvas {
-  height: 100%;
-  margin: 0px;
-  padding: 0px
-}*/
-
 #panel {
   position: absolute;
   top: 5px;
@@ -204,3 +198,4 @@ button::-moz-focus-inner {
   padding: 5px;
   border: 1px solid #999;
 }
+

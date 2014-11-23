@@ -56,7 +56,6 @@ $(function() {
   //   console.log("clicked on picture");
   // });
 
-  
 });
 
 

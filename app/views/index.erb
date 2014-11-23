@@ -81,6 +81,7 @@
 
 <!-- UPPER PANEL FOR PICTURE UPLOADING -->
   <div class="upload-panel" style="">
+  <form method="post" enctype="multipart/form-data" action='/upload'>
     <div id="file-input" class="fileinput fileinput-new input-group" data-provides="fileinput" style="">
       <div class="form-control" data-trigger="fileinput">
         <i class="glyphicon glyphicon-file fileinput-exists"></i> 
@@ -89,16 +90,17 @@
       <span class="input-group-addon btn btn-default btn-file">
         <span class="fileinput-new">Select file</span>
         <span class="fileinput-exists">Change</span>
-        <input type="file" name="filename" />
+        <input type="file" name="myfile" />
       </span>
       <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
     </div><!-- END OF INPUT FILE DIV-->
     <div  id="process-upload">
        <!--<button type="submit" class="ghost upload-button" style="background-color: #fff; color: black; float: right">UPLOAD</button>-->
       <button type="button" class="btn btn-default" id="cancel-upload" style="">CANCEL</button>
-      <button type="button" class="btn btn-default" id="upload-picture" style="">UPLOAD</button>
+      <button type="submit" class="btn btn-default" id="upload-picture" style="">UPLOAD</button>
     </div><!-- END OF DIV WITH UPLOAD/CANCEL BUTTONS-->  
   </div><!-- END OF UPLOADING PANEL--> 
+  </form>
 
 
   <!--DISPLAY 5 PICTURES SELECTED BY THE USER -->
@@ -106,22 +108,22 @@
     <div class="row">
       <div class="col-md-3">
         <a href="#">
-          <img src="http://placehold.it/800x600" class="placeholder thumbnail img-responsive" >
+          <img src="<%= @recent_pic_upload %>" class="placeholder thumbnail img-responsive" >
         </a>
       </div>
       <div class="col-md-3">
         <a href="#">
-          <img src="http://placehold.it/800x600" class="placeholder thumbnail img-responsive">
+          <img src="<%= @secondlast_upload %>" class="placeholder thumbnail img-responsive">
         </a>
       </div>
       <div class="col-md-3">
         <a href="#">
-          <img src="http://placehold.it/800x600" class="placeholder thumbnail img-responsive">
+          <img src="<%= @thirdlast_upload %>" class="placeholder thumbnail img-responsive">
         </a>
       </div>
       <div class="col-md-3">
         <a href="#">
-          <img src="http://placehold.it/800x600" class="placeholder thumbnail img-responsive">
+          <img src="<%= @fourthlast_upload %>" class="placeholder thumbnail img-responsive">
         </a>
       </div>
     </div>
@@ -139,7 +141,11 @@
   <!--coming from the backend-->
 
   <!-- INSTRAGRAM PICTURES PLACEHOLDER-->
-
+<!--   <div class="container">
+    <div class="row">
+    <%= @html %> 
+    </div>
+  </div> -->
 
 
 </div><!--END OF SECOND PAGE-->

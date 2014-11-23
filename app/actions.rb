@@ -16,54 +16,6 @@ helpers do
 end
 
 get '/' do
-#  erb :index
-# end
-
-# get '/instagram_images' do
-  Instagram.configure do |config|
-    config.client_id = settings.instagram_id
-    config.client_secret = settings.instagram_secret
-  end
-
-  lat1 = "49.282111111111114".to_f  #will get value passed in by uploaded image
-  lon1 = "-123.10839722222222".to_f #will get value passed in by uploaded image
-  # lat1 = "35.802547".to_f  #will get value passed in by uploaded image
-  # lon1 = "139.789519".to_f #will get value passed in by uploaded image
-
-  @html = "<h1>List of images close to a given latitude and longitude</h1>"
-  @html << "<div class='container'><div class='row'>"
-  #distance 10 = 10meter, 1000 = 1km
-  geolocationHash = {}
-  origin = {}
-  origin["latitude"] = lat1
-  origin["longitude"] = lon1
-  geolocationHash[:origins] = []
-  geolocationHash[:origins].push(origin)
-  geolocationHash[:markers] = []
-  geolocationHash[:images] = []
-  for media_item in Instagram.media_search(lat1, lon1, {:count => 20, :distance => 100, :MIN_TIMESTAMP => 1})
-    lat2 = media_item.location.latitude
-    lon2 = media_item.location.longitude
-
-    latlonghash = {}
-    latlonghash["latitude"] = lat2
-    latlonghash["longitude"] = lon2
-    geolocationHash[:markers].push(latlonghash)
-    imagehash = {}
-    imagehash["src"] = "#{media_item.images.thumbnail.url}"
-    geolocationHash[:images].push(imagehash)
-    dist = GeoDistance::Haversine.distance( lat1.to_f, lon1.to_f, lat2.to_f, lon2.to_f ).meters.number
-
-    @html << "<div class='col-md-2'>Distance: #{(dist/1000).round(2)}km<br/><br/>lat = #{lat2.to_f}, lon = #{lon2.to_f}<br/><br/>
-                <img src='#{media_item.images.thumbnail.url}' />
-              </div>"
-  end
-  @html << "</div></div>"
-
-  File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
-    f.write(geolocationHash.to_json)
-    f.close
-  end
   erb :index
 end
 
@@ -137,19 +89,19 @@ post '/upload' do
   else
     return "you need to upload a jpeg"
   end
+  erb :index
 end
 
 get '/instagram_images' do
   @pic_latitude = Picture.last[:latitude]
   @pic_longitude = Picture.last[:longitude]
-  @recent_pic_upload = Picture.last
-  @secondlast_upload = Picture.all[-2]
-  @thirdlast_upload = Picture.all[-3]
-  @fourthlast_upload = Picture.all[-4]
-  @fifthlast_upload = Picture.all[-5]
+  @recent_pic_upload = Picture.last[:photo_path]
+  @secondlast_upload = Picture.all[-2][:photo_path]
+  @thirdlast_upload = Picture.all[-3][:photo_path]
+  @fourthlast_upload = Picture.all[-4][:photo_path]
+  # @fifthlast_upload = Picture.all[-5]
 
   # binding.pry
-  
   
   # @recent_pic_upload.resize(0.25)
   Instagram.configure do |config|
@@ -163,30 +115,40 @@ get '/instagram_images' do
   @html = "<h1>List of images close to a given latitude and longitude</h1>"
   @html << "<div class='container'><div class='row'>"
   #distance 10 = 10meter, 1000 = 1km
-  # binding.pry
-  @html_pic_display = "<h1>Last 5 Uploads</h1>"
-  @html_pic_display << "<img src ='#{@recent_pic_upload.photo_path}'/> <img src ='#{@secondlast_upload.photo_path}'/> <img src ='#{@thirdlast_upload.photo_path}'/> <img src ='#{@fourthlast_upload.photo_path}'/> <img src ='#{@fifthlast_upload.photo_path}'/>"
-  descending_location = []
+  # @html_pic_display = "<h1>Last 5 Uploads</h1>"
+  # @html_pic_display << "<img src ='#{@recent_pic_upload.photo_path}'/> <img src ='#{@secondlast_upload.photo_path}'/> <img src ='#{@thirdlast_upload.photo_path}'/> <img src ='#{@fourthlast_upload.photo_path}'/> <img src ='#{@fifthlast_upload.photo_path}'/>"
+  # descending_location = []
+  @descending_location = []
+  geolocationHash = {}
+  origin = {}
+  origin["latitude"] = lat1
+  origin["longitude"] = lon1
+  geolocationHash[:origins] = []
+  geolocationHash[:origins].push(origin)
+  geolocationHash[:markers] = []
 
   for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 5000, :MIN_TIMESTAMP => 1})
     lat2 = media_item.location.latitude
     lon2 = media_item.location.longitude
-
+    temphash = {}
+    temphash["latitude"] = lat2
+    temphash["longitude"] = lon2
+    geolocationHash[:markers].push(temphash)
     dist = GeoDistance::Haversine.distance( lat1.to_f, lon1.to_f, lat2.to_f, lon2.to_f ).meters.number
-    descending_location << {distance: (dist/1000).round(2), image_url: media_item.images.thumbnail.url  }
+    @descending_location << {distance: (dist/1000).round(2), image_url: media_item.images.thumbnail.url  }
   end
-
-  descending_location = descending_location.sort_by {|k| k[:distance]}
-  descending_location = descending_location
-
-  descending_location.each do |location|
-    @html << "<div class='col-md-3'><br/>Distance: #{location[:distance]}km <br/>
-                <img src='#{location[:image_url]}'/>
+  @descending_location = @descending_location.sort_by {|k| k[:distance]}
+  @descending_location.each do |item|
+    
+     @html << "<div class='col-md-2'>Distance: #{item[:distance]}km<br/><br/>lat = #{item[:item].location.latitude.to_f}, lon = #{item[:item].location.longitude.to_f}<br/><br/>
+                <img src='#{item[:item].images.thumbnail.url}' />
               </div>"
   end
   @html << "</div></div>"
-  # @html_pic_display << "</div>"
-  # binding.pry
+  File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
+    f.write(geolocationHash.to_json)
+    f.close
+  end
   erb :index
 end
 
