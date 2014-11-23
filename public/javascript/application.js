@@ -2,7 +2,7 @@ $(function() {
   $.getJSON( 'javascript/location.json', function(data) { 
     $('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(data.origins[0].latitude, data.origins[0].longitude), 
       'bounds':true});
-   
+    console.log("images count = " + data.images.length);
     $.each( data.markers, function(i, m) {
       var polylinesCoords = []
       polylinesCoords[i] = []
@@ -16,6 +16,7 @@ $(function() {
       },  
         function(map,marker) {
           $(marker).click(function() {
+            console.log(i);
               $('#map_canvas').gmap('openInfoWindow', { 'content': "<img src='"+ data.images[i].src +"' />" }, this)
           });
 
