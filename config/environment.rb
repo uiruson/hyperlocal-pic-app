@@ -6,10 +6,6 @@ require 'active_support/all'
 # Load Sinatra Framework (with AR)
 require 'sinatra'
 require 'sinatra/activerecord'
-
-
-
-
 require 'pry'
 require 'gon-sinatra'
 
@@ -35,17 +31,6 @@ end
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
 
-# db = URI.parse('postgres://vagrant@localhost:5432/hyperlocal')
-
-# ActiveRecord::Base.establish_connection(
-  # :adapter  => 'postgresql',#? 'postgresql' : db.scheme,
-  # :host     => 'localhost',
-  # :username => 'hyperlocal',
-  # :password => 'hyperlocal',
-  # :database => 'hyperlocal',
-  # :encoding => 'utf8',
-  # :port => 5432
-# )
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
 

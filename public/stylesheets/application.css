@@ -1,11 +1,10 @@
-
 body {
   background-color: #699B99;
   font-family: 'Oswald', sans-serif;
   height: 100%;
   width: 100%;
-  margin-left: 0px !important;
-  overflow: hidden;
+ /* margin-left: 0px !important;
+  overflow: hidden;*/
   
 }
 
@@ -186,20 +185,6 @@ button::-moz-focus-inner {
   float: right; 
   border-color: black; 
   border-width: 2px
-}
-
-
-
-
-
-  
-
-
-
-html, body , #map-canvas {
-  height: 100%;
-  margin: 0px;
-  padding: 0px
 }
 
 #panel {
