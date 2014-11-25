@@ -73,7 +73,7 @@ get '/' do
 end
 
 get '/login' do
-  erb :'/upload'
+  redirect '/instagram_images/'
 end
 
 get '/signup' do
