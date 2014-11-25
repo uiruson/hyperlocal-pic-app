@@ -19,7 +19,6 @@ get '/' do
   erb :index
 end
 
-
 get '/login' do
   erb :'/upload'
 end
@@ -55,7 +54,7 @@ end
 
 get '/upload' do
   current_user
-  erb :"/upload"
+  erb :'/main'
 end
 
 post '/upload' do
@@ -92,7 +91,7 @@ post '/upload' do
   erb :index
 end
 
-get '/instagram_images' do
+post '/instagram_images' do
   @pic_latitude = Picture.last[:latitude]
   @pic_longitude = Picture.last[:longitude]
   @recent_pic_upload = Picture.last[:photo_path]
@@ -126,22 +125,25 @@ get '/instagram_images' do
   geolocationHash[:origins] = []
   geolocationHash[:origins].push(origin)
   geolocationHash[:markers] = []
-
-  for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 5000, :MIN_TIMESTAMP => 1})
+  geolocationHash[:images] = []
+  for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 1000, :MIN_TIMESTAMP => 1})
     lat2 = media_item.location.latitude
     lon2 = media_item.location.longitude
     temphash = {}
     temphash["latitude"] = lat2
     temphash["longitude"] = lon2
     geolocationHash[:markers].push(temphash)
+    imagehash = {}
+    imagehash["src"] = "#{media_item.images.thumbnail.url}"
+    geolocationHash[:images].push(imagehash)
     dist = GeoDistance::Haversine.distance( lat1.to_f, lon1.to_f, lat2.to_f, lon2.to_f ).meters.number
-    @descending_location << {distance: (dist/1000).round(2), image_url: media_item.images.thumbnail.url  }
+    @descending_location << {item: media_item, distance: (dist/1000).round(2)}
   end
   @descending_location = @descending_location.sort_by {|k| k[:distance]}
   @descending_location.each do |item|
-    
-     @html << "<div class='col-md-2'>Distance: #{item[:distance]}km<br/><br/>lat = #{item[:item].location.latitude.to_f}, lon = #{item[:item].location.longitude.to_f}<br/><br/>
-                <img src='#{item[:item].images.thumbnail.url}' />
+
+     @html << "<div class='col-md-2'><strong>Distance: #{item[:distance]}km</strong><br/>
+                <img src='#{item[:item].images.thumbnail.url}'/ style='margin-bottom:10px;'>
               </div>"
   end
   @html << "</div></div>"
@@ -149,7 +151,7 @@ get '/instagram_images' do
     f.write(geolocationHash.to_json)
     f.close
   end
-  erb :index
+  erb :'/main'
 end
 
 get '/delete_photo' do

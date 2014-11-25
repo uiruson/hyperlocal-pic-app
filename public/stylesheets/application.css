@@ -129,7 +129,7 @@ button::-moz-focus-inner {
 /* SECOND PAGE*/
 
 #second-page {
-  display: none;
+  display: block;
   background-color: #699B99;
   width: 100%;
   height: 100%;
@@ -137,12 +137,20 @@ button::-moz-focus-inner {
 
 /* SECOND PAGE NAVBAR*/
 
+#upload_picture_btn::after{
+  content : ' | ';
+}
+
 #upload-signout-navbar {
   background-color: #699B99;
 }
 
 #upload-signout-navbar li a{
-  color: yellow
+  color: #fee268;
+}
+
+#upload-signout-navbar li a:hover{
+  color: #fecf02;
 }
 
 
