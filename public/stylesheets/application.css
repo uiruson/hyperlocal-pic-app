@@ -102,8 +102,11 @@ button::-moz-focus-inner {
 }
 /* link to register if new user -color of the text in the button*/
 #register {
-  text-decoration: none;
+  text-decoration: none !important;
   color: yellow !important;
+}
+#register:hover {
+  text-decoration: none;
 }
 
 #sign-up {
@@ -147,7 +150,7 @@ button::-moz-focus-inner {
 #bs-example-navbar-collapse-1 {
   width: 100%;
 }
-/* panel */
+/* UPLOAD PANEL */
 .upload-panel {
   display:none; 
   z-index: 1; 
@@ -168,7 +171,7 @@ button::-moz-focus-inner {
   margin-right: auto;
 
 }
-#cancel-upload{
+#cancel-upload {
   background-color: #fff; 
   color: black; 
   float: left; 
@@ -186,14 +189,7 @@ button::-moz-focus-inner {
   border-width: 2px
 }
 
-
-
-
-
-  
-=======
-
-
+/*MAP*/
 html, body , #map-canvas {
   height: 100%;
   margin: 0px;
