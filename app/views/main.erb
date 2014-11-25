@@ -1,0 +1,73 @@
+<div id="second-page" >
+
+  <!--TOP NAVBAR WITH BUTTONS TO UPLOAD PICTURES AND LOG OUT-->
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul id="upload-signout-navbar" class="nav navbar-nav navbar-right">
+          <li id="upload-panel-button"><a href="#"  class="pull-me">Upload pictures</a></li>
+          <li><a href="#">Sign out</a></li>
+        </ul> <!-- END OF NAVBAR RIGHT -->
+      </div> <!-- end of navbar collapse-->
+    </div> 
+  </nav><!--END OF NAVBAR-->
+
+<!-- UPPER PANEL FOR PICTURE UPLOADING -->
+  <div class="upload-panel" style="">
+  <form method="post" enctype="multipart/form-data" action='/upload'>
+    <div id="file-input" class="fileinput fileinput-new input-group" data-provides="fileinput" style="">
+      <div class="form-control" data-trigger="fileinput">
+        <i class="glyphicon glyphicon-file fileinput-exists"></i> 
+        <span class="fileinput-filename"></span>
+      </div>
+      <span class="input-group-addon btn btn-default btn-file">
+        <span class="fileinput-new">Select file</span>
+        <span class="fileinput-exists">Change</span>
+        <input type="file" name="myfile" />
+      </span>
+      <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+    </div><!-- END OF INPUT FILE DIV-->
+    <div  id="process-upload">
+       <!--<button type="submit" class="ghost upload-button" style="background-color: #fff; color: black; float: right">UPLOAD</button>-->
+      <button type="button" class="btn btn-default" id="cancel-upload" style="">CANCEL</button>
+      <button type="submit" class="btn btn-default" id="upload-picture" style="">UPLOAD</button>
+    </div><!-- END OF DIV WITH UPLOAD/CANCEL BUTTONS-->  
+  </div><!-- END OF UPLOADING PANEL--> 
+  </form>
+
+
+  <!--DISPLAY 5 PICTURES SELECTED BY THE USER -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="/instagram_images/<%= @recent_pic_upload.id %>">
+          <img src="/<%= @recent_pic_upload.photo_path %>" class="placeholder thumbnail img-responsive" >
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="/instagram_images/<%= @secondlast_upload.id %>">
+          <img src="/<%= @secondlast_upload.photo_path %>" class="placeholder thumbnail img-responsive">
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="/instagram_images/<%= @thirdlast_upload.id %>">
+          <img src="/<%= @thirdlast_upload.photo_path %>" class="placeholder thumbnail img-responsive">
+        </a>
+      </div>
+      <div class="col-md-3">
+        <a href="/instagram_images/<%= @fourthlast_upload.id %>">
+          <img src="/<%= @fourthlast_upload.photo_path %>" class="placeholder thumbnail img-responsive">
+        </a>
+      </div>
+    </div>
+  </div><!--END OF THE USER'S PICTURE CONTAINER-->
+
+
+<%= @html %>
+  <!-- MAP-->
+<!--   <div class="container">
+    <div class="row">
+      <div id="map_canvas" style="width:100%; height: 500px"></div>
+    </div>
+  </div> -->

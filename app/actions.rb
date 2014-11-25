@@ -13,6 +13,59 @@ helpers do
       @current_user = User.find(session[:user_id])
     end
   end
+  def click_picture(pic)
+    @recent_pic_upload = Picture.last
+    @secondlast_upload = Picture.all[-2]
+    @thirdlast_upload = Picture.all[-3]
+    @fourthlast_upload = Picture.all[-4]
+ 
+    Instagram.configure do |config|
+      config.client_id = settings.instagram_id
+      config.client_secret = settings.instagram_secret
+    end
+    # binding.pry
+    lat1 = pic.latitude
+    lon1 = pic.longitude
+
+    @html = "<h1>List of images close to a given latitude and longitude</h1>"
+    @html << "<div class='container'><div class='row'>"
+
+    @descending_location = []
+    geolocationHash = {}
+    origin = {}
+    origin["latitude"] = lat1
+    origin["longitude"] = lon1
+    geolocationHash[:origins] = []
+    geolocationHash[:origins].push(origin)
+    geolocationHash[:markers] = []
+    geolocationHash[:images] = []
+    for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 1000, :MIN_TIMESTAMP => 1})
+      lat2 = media_item.location.latitude
+      lon2 = media_item.location.longitude
+      temphash = {}
+      temphash["latitude"] = lat2
+      temphash["longitude"] = lon2
+      geolocationHash[:markers].push(temphash)
+      imagehash = {}
+      imagehash["src"] = "#{media_item.images.thumbnail.url}"
+      geolocationHash[:images].push(imagehash)
+      dist = GeoDistance::Haversine.distance( lat1.to_f, lon1.to_f, lat2.to_f, lon2.to_f ).meters.number
+      @descending_location << {item: media_item, distance: (dist/1000).round(2)}
+    end
+    @descending_location = @descending_location.sort_by {|k| k[:distance]}
+    @descending_location.each do |item|
+
+      @html << "<div class='col-md-2'><strong>Distance: #{item[:distance]}km</strong><br/>
+                <img src='#{item[:item].images.thumbnail.url}'/ style='margin-bottom:10px;'>
+              </div>"
+    end
+    @html << "</div></div>"
+    File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
+      f.write(geolocationHash.to_json)
+      f.close
+    end
+    erb :'/main'
+  end
 end
 
 get '/' do
@@ -33,8 +86,6 @@ post '/signup' do
     username: params[:username],
     password: params[:password]
   )
-  # session[:user_id] = @user.id
-  # @current_user = session[:user_id]
   redirect '/upload'
 end
 
@@ -59,18 +110,15 @@ end
 
 post '/upload' do
 
-  # binding.pry
   file_path = 'uploads/' + params['myfile'][:filename]
-  # pic_resize = params['myfile'][:filename]
-  # image = MiniMagick::Image.open(pic_resize)
 
   File.open('public/' + file_path, "w") do |f|
     f.write(params['myfile'][:tempfile].read)
   end
 
   if params['myfile'][:type].match(/(jpg|jpeg)$/)
-    if EXIFR::JPEG.new(file_path).exif? && EXIFR::JPEG.new(file_path).gps != nil
-      exif = EXIFR::JPEG.new(file_path)
+    if EXIFR::JPEG.new('public/' + file_path).exif? && EXIFR::JPEG.new('public/' + file_path).gps != nil
+      exif = EXIFR::JPEG.new('public/' + file_path)
       @latitude = exif.gps.latitude
       @longitude = exif.gps.longitude
       # binding.pry
@@ -91,68 +139,16 @@ post '/upload' do
   erb :index
 end
 
-post '/instagram_images' do
-  @pic_latitude = Picture.last[:latitude]
-  @pic_longitude = Picture.last[:longitude]
-  @recent_pic_upload = Picture.last[:photo_path]
-  @secondlast_upload = Picture.all[-2][:photo_path]
-  @thirdlast_upload = Picture.all[-3][:photo_path]
-  @fourthlast_upload = Picture.all[-4][:photo_path]
-  # @fifthlast_upload = Picture.all[-5]
-
-  # binding.pry
-  
-  # @recent_pic_upload.resize(0.25)
-  Instagram.configure do |config|
-    config.client_id = settings.instagram_id
-    config.client_secret = settings.instagram_secret
-  end
-# binding.pry
-  lat1 = @pic_latitude
-  lon1 = @pic_longitude
-
-  @html = "<h1>List of images close to a given latitude and longitude</h1>"
-  @html << "<div class='container'><div class='row'>"
-  #distance 10 = 10meter, 1000 = 1km
-  # @html_pic_display = "<h1>Last 5 Uploads</h1>"
-  # @html_pic_display << "<img src ='#{@recent_pic_upload.photo_path}'/> <img src ='#{@secondlast_upload.photo_path}'/> <img src ='#{@thirdlast_upload.photo_path}'/> <img src ='#{@fourthlast_upload.photo_path}'/> <img src ='#{@fifthlast_upload.photo_path}'/>"
-  # descending_location = []
-  @descending_location = []
-  geolocationHash = {}
-  origin = {}
-  origin["latitude"] = lat1
-  origin["longitude"] = lon1
-  geolocationHash[:origins] = []
-  geolocationHash[:origins].push(origin)
-  geolocationHash[:markers] = []
-  geolocationHash[:images] = []
-  for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 1000, :MIN_TIMESTAMP => 1})
-    lat2 = media_item.location.latitude
-    lon2 = media_item.location.longitude
-    temphash = {}
-    temphash["latitude"] = lat2
-    temphash["longitude"] = lon2
-    geolocationHash[:markers].push(temphash)
-    imagehash = {}
-    imagehash["src"] = "#{media_item.images.thumbnail.url}"
-    geolocationHash[:images].push(imagehash)
-    dist = GeoDistance::Haversine.distance( lat1.to_f, lon1.to_f, lat2.to_f, lon2.to_f ).meters.number
-    @descending_location << {item: media_item, distance: (dist/1000).round(2)}
-  end
-  @descending_location = @descending_location.sort_by {|k| k[:distance]}
-  @descending_location.each do |item|
-
-     @html << "<div class='col-md-2'><strong>Distance: #{item[:distance]}km</strong><br/>
-                <img src='#{item[:item].images.thumbnail.url}'/ style='margin-bottom:10px;'>
-              </div>"
-  end
-  @html << "</div></div>"
-  File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
-    f.write(geolocationHash.to_json)
-    f.close
-  end
-  erb :'/main'
+get '/instagram_images' do
+  pic = Picture.last
+  click_picture(pic)
 end
+
+get '/instagram_images/:id' do
+  pic = Picture.find(params[:id])
+  click_picture(pic)
+end
+
 
 get '/delete_photo' do
 end
