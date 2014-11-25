@@ -3,14 +3,6 @@ body {
   font-family: 'Oswald', sans-serif;
   height: 100%;
   width: 100%;
-<<<<<<< HEAD
- /* margin-left: 0px !important;
-=======
-  margin: auto;
-/*  margin-left: 0px !important;
->>>>>>> 193bb8184a594423d773904745b3b176b19ae896
-  overflow: hidden;*/
-  
 }
 
 
@@ -108,8 +100,11 @@ button::-moz-focus-inner {
 }
 /* link to register if new user -color of the text in the button*/
 #register {
-  text-decoration: none;
+  text-decoration: none !important;
   color: yellow !important;
+}
+#register:hover {
+  text-decoration: none;
 }
 
 #sign-up {
@@ -135,8 +130,8 @@ button::-moz-focus-inner {
 #second-page {
   display: block;
   background-color: #699B99;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 }
 
 /* SECOND PAGE NAVBAR*/
@@ -161,7 +156,7 @@ button::-moz-focus-inner {
 #bs-example-navbar-collapse-1 {
   width: 100%;
 }
-/* panel */
+/* UPLOAD PANEL */
 .upload-panel {
   display:none; 
   z-index: 1; 
@@ -182,7 +177,7 @@ button::-moz-focus-inner {
   margin-right: auto;
 
 }
-#cancel-upload{
+#cancel-upload {
   background-color: #fff; 
   color: black; 
   float: left; 
@@ -198,6 +193,12 @@ button::-moz-focus-inner {
   float: right; 
   border-color: black; 
   border-width: 2px
+}
+
+#map-canvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
 }
 
 #panel {

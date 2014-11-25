@@ -2,44 +2,29 @@ $(function() {
 
   // second page should be invisible at the beginning
   // $('#second-page').css({display : "none"});
-<<<<<<< HEAD
-  $('#right-panel-register').css({display : "none"});
-=======
  $('#right-panel-register').css({display : "none"});
->>>>>>> 193bb8184a594423d773904745b3b176b19ae896
 
   // clicking on the arrow makes the side panel visible
   // $('#right-panel-link').on('click', function(){
   //   console.log("clicked the arrow");
   // });
   $('#right-panel-link').panelslider({side: 'right', clickClose: false, duration: 500 });
-
-
   //clicking on register in the side panel shows the registration form
   // and makes the login form disappear
   $('#register').on('click', function(){
-    $('#register-button').hide();
     $('#right-panel-login').css({display : "none"});
-  })
-
-
-  // // SECOND PAGE
-  // //clicking on the loggin button makes the second page visible
-<<<<<<< HEAD
-  $('#login-button').on('click', function(){
-=======
-  $('#login-button').click(function() {
->>>>>>> 193bb8184a594423d773904745b3b176b19ae896
-    $.panelslider.close();
-    $('#first-page').hide();
-    $('#second-page').show();
+    $('#right-panel-register').css({display : "block"});
+    $('#register-button').hide();
   });
 
   $('#upload-panel-button').on('click', function(){
      var uploadPanel = $('.upload-panel');
      if (uploadPanel.is(':hidden')) {
-        uploadPanel.slideDown(300);
-        $(this).css({display : "none"})
+      var height = $('.upload-panel').outerHeight(true);
+      $('#second-page').animate({'margin-top': height+'px'}, 1000);
+      uploadPanel.slideDown(1000);
+      $(this).css({display : "none"})
+
      }
   });
 
@@ -48,7 +33,8 @@ $(function() {
   $('#upload-picture').on('click', function(){
     console.log("clicked upload button")
     var uploadPanel = $('.upload-panel');
-    uploadPanel.slideUp(300);
+    uploadPanel.slideUp(1000);
+    $('#second-page').animate({'margin-top': '0px'}, 1000);
     $('#upload-panel-button').css({display : "block"});
   });
 
@@ -56,18 +42,11 @@ $(function() {
   $('#cancel-upload').on('click', function(){
     console.log("clicked upload button")
     var uploadPanel = $('.upload-panel');
-    uploadPanel.slideUp(300);
+    uploadPanel.slideUp(1000);
+    $('#second-page').animate({'margin-top': '0px'}, 1000);
     $('#upload-panel-button').css({display : "block"});
   });
 
-  // $('.placeholder').on('click', function(){
-  //   console.log("clicked on picture");
-  // });
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 193bb8184a594423d773904745b3b176b19ae896
 });
 
 
