@@ -5,9 +5,10 @@ gem 'rake'
 gem 'activesupport'
 
 gem 'sinatra'
+gem 'sinatra-flash'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
-
+gem 'mini_magick'
 gem 'puma'
 gem 'tux'
 gem 'instagram'
@@ -19,5 +20,5 @@ gem 'json'
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
-  gem 'pg'
+  gem 'sqlite3'
 end
