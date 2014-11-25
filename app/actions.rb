@@ -27,8 +27,9 @@ helpers do
     lat1 = pic.latitude
     lon1 = pic.longitude
 
-    @html = "<h1>List of images close to a given latitude and longitude</h1>"
-    @html << "<div class='container'><div class='row'>"
+    @html = "<div class='container'>"
+    @html << "<h2>List of images nearby</h2><div class='row'>"
+
 
     @descending_location = []
     geolocationHash = {}
@@ -39,7 +40,7 @@ helpers do
     geolocationHash[:origins].push(origin)
     geolocationHash[:markers] = []
     geolocationHash[:images] = []
-    for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 1000, :MIN_TIMESTAMP => 1})
+    for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 2000, :MIN_TIMESTAMP => 1})
       lat2 = media_item.location.latitude
       lon2 = media_item.location.longitude
       temphash = {}
