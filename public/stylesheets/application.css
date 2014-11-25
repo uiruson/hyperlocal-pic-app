@@ -3,8 +3,12 @@ body {
   font-family: 'Oswald', sans-serif;
   height: 100%;
   width: 100%;
+<<<<<<< HEAD
+ /* margin-left: 0px !important;
+=======
   margin: auto;
 /*  margin-left: 0px !important;
+>>>>>>> 193bb8184a594423d773904745b3b176b19ae896
   overflow: hidden;*/
   
 }
