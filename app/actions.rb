@@ -143,7 +143,8 @@ post '/upload' do
       redirect '/instagram_images'
     end
   else
-    return "you need to upload a jpeg"
+    flash[:message] = "**UPLOAD FAILED**<br/>You need to upload a jpg file"
+    redirect '/instagram_images'
   end
   erb :'/main'
 end
