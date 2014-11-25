@@ -4,6 +4,7 @@ require 'instagram'
 require 'geo-distance'
 require 'gon-sinatra'
 require 'json'
+require 'sinatra/flash'
 
 enable :sessions
 
@@ -27,8 +28,8 @@ helpers do
     lat1 = pic.latitude
     lon1 = pic.longitude
 
-    @html = "<div class='container'>"
-    @html << "<h2>List of images nearby</h2><div class='row'>"
+    @html = "<div class='container' id='instagramImagesContainer'>"
+    @html << "<h2>LIST OF NEARBY IMAGES</h2><div class='row'>"
 
 
     @descending_location = []
@@ -40,7 +41,7 @@ helpers do
     geolocationHash[:origins].push(origin)
     geolocationHash[:markers] = []
     geolocationHash[:images] = []
-    for media_item in Instagram.media_search(lat1, lon1, {:count => 10, :distance => 2000, :MIN_TIMESTAMP => 1})
+    for media_item in Instagram.media_search(lat1, lon1, {:count => 15, :distance => 1200})
       lat2 = media_item.location.latitude
       lon2 = media_item.location.longitude
       temphash = {}
@@ -56,16 +57,21 @@ helpers do
     @descending_location = @descending_location.sort_by {|k| k[:distance]}
     @descending_location.each do |item|
 
-      @html << "<div class='col-md-2'><strong>Distance: #{item[:distance]}km</strong><br/>
-                <img src='#{item[:item].images.thumbnail.url}'/ style='margin-bottom:10px;'>
+      @html << "<div class='col-md-2'><span>Distance: #{item[:distance]}km</span><br/>
+                <img src='#{item[:item].images.thumbnail.url}'/ style='margin-bottom:15px;border: 7px solid white;'>
               </div>"
     end
     @html << "</div></div>"
-    File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
-      f.write(geolocationHash.to_json)
-      f.close
-    end
+
+    gon.your_json = geolocationHash.to_json
+    # File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
+    #   f.write(geolocationHash.to_json)
+    #   f.close
+    # end
     erb :'/main'
+    # if session[:message] != ""
+    #   session[:message] == ""
+    # end
   end
 end
 
@@ -102,6 +108,7 @@ end
 
 get '/logout' do
   session.clear
+  redirect '/'
 end
 
 get '/upload' do
@@ -132,12 +139,13 @@ post '/upload' do
       # binding.pry
       redirect'/instagram_images'
     else
-      return "Sorry, try taking a picture with your location turned on!"
+      flash[:message] = "**UPLOAD FAILED**<br/>Your picture doesn't have any GPS data !"
+      redirect '/instagram_images'
     end
   else
     return "you need to upload a jpeg"
   end
-  erb :index
+  erb :'/main'
 end
 
 get '/instagram_images' do

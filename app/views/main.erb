@@ -1,3 +1,4 @@
+<%= include_gon %>
 <div id="second-page" >
   <!--TOP NAVBAR WITH BUTTONS TO UPLOAD PICTURES AND LOG OUT-->
   <nav class="navbar navbar-default" role="navigation">
@@ -5,8 +6,8 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul id="upload-signout-navbar" class="nav navbar-nav navbar-right">
-          <li id="upload-panel-button"><a href="#"  class="pull-me">Upload pictures</a></li>
-          <li><a href="#">Sign out</a></li>
+          <li id="upload-panel-button"><a href="#"  class="pull-me">UPLOAD PHOTO</a></li>
+          <li><a href="/logout">SIGN OUT</a></li>
         </ul> <!-- END OF NAVBAR RIGHT -->
       </div> <!-- end of navbar collapse-->
     </div> 
@@ -37,35 +38,40 @@
 
 
   <!--DISPLAY 5 PICTURES SELECTED BY THE USER -->
-  <div class="container">
+  <% if flash[:message] %>
+    <div class="container">
+       <h3 style="color:#ff7a82;"><%= flash[:message] %></h3>
+    </div>
+  <% end %>
+  <div class="container" id="userPhotosContainer">
+    <h2 id="yourPhotos">YOUR PHOTOS</h2>
     <div class="row">
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @recent_pic_upload.id %>">
-          <img src="/<%= @recent_pic_upload.photo_path %>" class="placeholder thumbnail img-responsive" >
+        <a href="/instagram_images/<%= @recent_pic_upload.id %>" id="userImg-<%= @recent_pic_upload.id %>">
+          <img src="/<%= @recent_pic_upload.photo_path %>"  class="thumbnail img-responsive" >
         </a>
       </div>
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @secondlast_upload.id %>">
-          <img src="/<%= @secondlast_upload.photo_path %>" class="placeholder thumbnail img-responsive">
+        <a href="/instagram_images/<%= @secondlast_upload.id %>" id="userImg-<%= @secondlast_upload.id %>">
+          <img src="/<%= @secondlast_upload.photo_path %>"  class="thumbnail img-responsive">
         </a>
       </div>
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @thirdlast_upload.id %>">
-          <img src="/<%= @thirdlast_upload.photo_path %>" class="placeholder thumbnail img-responsive">
+        <a href="/instagram_images/<%= @thirdlast_upload.id %>" id="userImg-<%= @thirdlast_upload.id %>">
+          <img src="/<%= @thirdlast_upload.photo_path %>"  class="thumbnail img-responsive">
         </a>
       </div>
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @fourthlast_upload.id %>">
-          <img src="/<%= @fourthlast_upload.photo_path %>" class="placeholder thumbnail img-responsive">
+        <a href="/instagram_images/<%= @fourthlast_upload.id %>" id="userImg-<%= @fourthlast_upload.id %>">
+          <img src="/<%= @fourthlast_upload.photo_path %>"  class="thumbnail img-responsive">
         </a>
       </div>
     </div>
   </div><!--END OF THE USER'S PICTURE CONTAINER-->
-
-
+  
   <!--MAP-->
-  <div class="container">
-    <h2>Map</h2>
+  <div class="container" id="mapContainer">
+    <h2>MAP</h2>
     <div style="width:100%;height:100%;">
       <div id="map_canvas"></div>
     </div>

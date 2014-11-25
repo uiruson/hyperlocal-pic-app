@@ -5,6 +5,7 @@ gem 'rake'
 gem 'activesupport'
 
 gem 'sinatra'
+gem 'sinatra-flash'
 gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 gem 'mini_magick'

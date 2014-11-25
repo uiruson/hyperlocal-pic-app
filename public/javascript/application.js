@@ -1,14 +1,15 @@
 $(function() {
 
-  // second page should be invisible at the beginning
-  // $('#second-page').css({display : "none"});
- $('#right-panel-register').css({display : "none"});
+ var pathname = window.location.pathname;
+ var imgId;
 
-  // clicking on the arrow makes the side panel visible
-  // $('#right-panel-link').on('click', function(){
-  //   console.log("clicked the arrow");
-  // });
-  $('#right-panel-link').panelslider({side: 'right', clickClose: false, duration: 500 });
+ if (pathname.indexOf("/instagram_images/") >= 0){
+    imgId = pathname.replace('/instagram_images/','');
+    $('#userImg-'+imgId+' img').css('background-color','#fee268');
+ }
+ 
+ $('#right-panel-register').css({display : "none"});
+ $('#right-panel-link').panelslider({side: 'right', clickClose: false, duration: 500 });
   //clicking on register in the side panel shows the registration form
   // and makes the login form disappear
   $('#register').on('click', function(){
