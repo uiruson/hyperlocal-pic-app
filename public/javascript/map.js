@@ -5,11 +5,12 @@ var markers;
 var MY_MAPTYPE_ID = 'custom_style';
 
 //Grabbing lat, lon from user's pictures and instagram's pictures
-$.getJSON( 'javascript/location.json', function(data) { 
+$.getJSON( '/javascript/location.json', function(data) { 
   $.each( data.markers, function(i, m) {
       polylineCoordinates.push(new google.maps.LatLng(m.latitude, m.longitude));
   });
   origin = new google.maps.LatLng(data.origins[0].latitude, data.origins[0].longitude);
+  console.log("origin: " + origin);
 });
 
 function initialize() {
@@ -44,7 +45,7 @@ function initialize() {
       mapTypeId: MY_MAPTYPE_ID
   }
 
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
   var styledMapOptions = {
     name: 'Custom Style'
   };
@@ -56,7 +57,7 @@ function initialize() {
 }
 
 function populateMarkersAndRoutes(){
-   $.getJSON('javascript/location.json',
+   $.getJSON('/javascript/location.json',
       function(data){
         var infoWindow = new google.maps.InfoWindow()
         for(var x=0; x < data.markers.length; x++){
