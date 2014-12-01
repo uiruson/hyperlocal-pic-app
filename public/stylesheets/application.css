@@ -1,0 +1,250 @@
+body {
+  background-color: #699B99;
+  font-family: 'Oswald', sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+
+/* NAVBAR EXTRA STYLING */
+.navbar-default {
+  background-color: #699B99 !important;
+   border: none !important;
+}
+
+/* STYLE FOR APP NAME SECTION */
+
+#app-name {
+  color: #FFFFFF;
+  font-size: 12em;
+  display: block;
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
+  padding-top: 10%;
+
+}
+
+/* Buttons styles */
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/*GHOST BUTTONS */
+.ghost {
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  color:#ffffff;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  border:0.15em solid #fff;
+  padding:0.4em 0.6em;
+  -webkit-transition: color 0.3s, border-color 0.3s ease-out;
+  transition: color 0.3s, border-color 0.3s ease-out;
+  margin-right: auto;
+  margin-left: auto;
+}
+/*EXTRA STYLING FOR 'TRY AS A GUEST GHOST BUTTON */
+
+#enter.ghost:hover,
+#enter.ghost:active {
+  color: #000;
+  border-color: #000;
+  transition: color 0.3s ease-in,
+              border-color 0.3s ease-in;
+}
+/* EXTRA STYLING FOR SIDE BUTTON TO LOGIN OR REGISTER */
+.ghost.side-button:hover,
+.ghost.side-button:active {
+  color: #f0f20b;
+  border-color: #f0f20b;
+  transition: color 0.3s ease-in,
+              border-color 0.3s ease-in;
+}
+
+/* ARROW BUTTON */
+#arrow-button {
+  background-color: #699B99;
+  border: none;
+}
+
+#arrow-button > span {
+  color: yellow;
+  font-size: 1.5em;
+}
+
+
+/* STYLING FOR REGISTER/LOGIN SIDE PANEL */
+.panel {
+  display: none;
+  width: 220px;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+}
+
+
+#login-button {
+  background-color: #000;
+  width: 100%;
+}
+
+#register-button {
+  color: #000 !important;
+  background-color: #000 !important;
+  border: none;
+  width: 100%;
+}
+/* link to register if new user -color of the text in the button*/
+#register {
+  text-decoration: none !important;
+  color: yellow !important;
+}
+#register:hover {
+  text-decoration: none;
+}
+
+#sign-up {
+  background-color: #000;
+  width: 100%;
+}
+
+.ghost.upload-button:hover,
+.ghost.upload-button:active { 
+  color: #699B99;
+  border-color: #fff;
+  transition: color 0.3s ease-in,
+              border-color 0.3s ease-in;
+}
+
+#right-panel-register{
+  display:none;
+}
+
+/*==================*/
+/* SECOND PAGE*/
+
+#second-page {
+  display: block;
+  background-color: #699B99;
+  width: auto;
+  height: auto;
+}
+
+#second-page h2{
+  color: white;
+}
+
+/* SECOND PAGE NAVBAR*/
+#upload_picture_btn::after{
+  content : ' | ';
+}
+
+#upload-signout-navbar {
+  background-color: #699B99;
+}
+
+#upload-signout-navbar li a{
+  color: #fee268;
+}
+
+#upload-signout-navbar li a:hover{
+  color: #fecf02;
+}
+
+
+#bs-example-navbar-collapse-1 {
+  width: 100%;
+}
+/* UPLOAD PANEL */
+.upload-panel {
+  display:none; 
+  z-index: 1; 
+  background-color: #ff7a82; 
+  position: absolute; 
+  top: 0px; 
+  padding: 2%
+}
+#file-input {
+  width: 50%; 
+  margin-left: auto; 
+  margin-right: auto
+}
+
+#process-upload {
+  width: 50%; 
+  margin-left: auto; 
+  margin-right: auto;
+
+}
+#cancel-upload {
+  background-color: #fff; 
+  color: black; 
+  float: left; 
+  margin-right: 5px; 
+  color: #ff5963; 
+  border-color: black; 
+  border-width: 2px
+}
+
+#upload-picture {
+  background-color: #fff; 
+  color: black; 
+  float: right; 
+  border-color: black; 
+  border-width: 2px
+}
+
+#map_canvas {
+  width: 100%;
+  height: 500px;
+  border: 7px solid white;
+  margin: 0px;
+  padding: 0px
+}
+
+#panel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  margin-left: -180px;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+}
+
+#userPhotosContainer, #mapContainer, #instagramImagesContainer{
+  padding-bottom: 55px;
+}
+
+#instagramImagesContainer span{
+  font-weight: 200;
+  color: white;
+}
+
+#userPhotosContainer h2{
+  font-size: 65px !important;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+}
+
+#mapContainer h2{
+  font-size: 65px !important;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+}
+
+#instagramImagesContainer h2{
+  font-size: 65px !important;
+  margin: auto;
+  text-align: center;
+  padding: 30px;
+}
+
+
