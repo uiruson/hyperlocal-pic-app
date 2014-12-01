@@ -21,5 +21,11 @@ gem 'json'
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
-  gem 'sqlite3'
+  gem 'pg'
+end
+
+group :production do
+  gem 'pry'
+  gem 'shotgun'
+  gem 'pg'
 end
