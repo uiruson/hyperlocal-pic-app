@@ -1,7 +1,7 @@
 Hyperlocal Pic App
 ====================
 
-Brought to you by Lighthouse Labs
+Hyperlocal is a Sinatra app which allows user to upload a photo and discover nearby photos of interest within certain range
 
 ## Getting Started
 
