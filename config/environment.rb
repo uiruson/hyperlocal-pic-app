@@ -39,7 +39,7 @@ ActiveRecord::Base.establish_connection(
   :database => 'd8l9o8p3jie214',
   :encoding => 'unicode',
   :port => 5432
-)s
+)
 
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
