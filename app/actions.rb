@@ -1,4 +1,4 @@
-require 'pry'
+
 require 'exifr'
 require 'instagram'
 require 'geo-distance'
