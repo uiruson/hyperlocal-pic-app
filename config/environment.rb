@@ -38,6 +38,7 @@ ActiveRecord::Base.establish_connection(
   :password => 'sSkIzOzaJRHIuIdOs0Se9ypgf_',
   :database => 'd8l9o8p3jie214',
   :encoding => 'unicode',
+  :url => 'postgres://czliyfcqxaehod:sSkIzOzaJRHIuIdOs0Se9ypgf_@ec2-54-163-248-144.compute-1.amazonaws.com:5432/d8l9o8p3jie214',
   :port => 5432
 )
 
