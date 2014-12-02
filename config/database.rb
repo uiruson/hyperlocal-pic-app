@@ -11,7 +11,7 @@ configure do
       database: "db/db.sqlite3"
     }
   else
-    set :database, ENV['postgres://czliyfcqxaehod:sSkIzOzaJRHIuIdOs0Se9ypgf_@ec2-54-163-248-144.compute-1.amazonaws.com:5432/d8l9o8p3jie214']
+    set :database, ENV['DATABASE_URL']
   end
    
 
