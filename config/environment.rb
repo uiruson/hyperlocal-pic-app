@@ -30,17 +30,27 @@ end
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+db = URI.parse('postgres://postgres:postgres@localhost:5432/hyperlocal')
 
 ActiveRecord::Base.establish_connection(
-  :adapter  => 'postgresql',
-  :host     => 'ec2-54-163-248-144.compute-1.amazonaws.com',
-  :username => 'czliyfcqxaehod',
-  :password => 'sSkIzOzaJRHIuIdOs0Se9ypgf_',
-  :database => 'd8l9o8p3jie214',
-  :encoding => 'unicode',
-  :url => 'postgres://czliyfcqxaehod:sSkIzOzaJRHIuIdOs0Se9ypgf_@ec2-54-163-248-144.compute-1.amazonaws.com:5432/d8l9o8p3jie214',
+  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  :host     => db.host,
+  :username => db.user,
+  :password => db.password,
+  :database => db.path[1..-1],
+  :encoding => 'utf8',
   :port => 5432
 )
+
+# ActiveRecord::Base.establish_connection(
+#   :adapter  => 'postgresql',
+#   :host     => 'ec2-54-163-248-144.compute-1.amazonaws.com',
+#   :username => 'czliyfcqxaehod',
+#   :password => 'sSkIzOzaJRHIuIdOs0Se9ypgf_',
+#   :database => 'd8l9o8p3jie214',
+#   :encoding => 'unicode',
+#   :port => 5432
+# )
 
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
