@@ -63,14 +63,7 @@ helpers do
     @html << "</div></div>"
 
     gon.your_json = geolocationHash.to_json
-    # File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
-    #   f.write(geolocationHash.to_json)
-    #   f.close
-    # end
     erb :'/main'
-    # if session[:message] != ""
-    #   session[:message] == ""
-    # end
   end
 end
 
@@ -78,21 +71,30 @@ get '/' do
   erb :index
 end
 
-get '/login' do
-  redirect '/instagram_images/'
+post '/login' do
+  @user = User.where(username: params[:username]).first
+  if @user && params[:password] == @user.password
+    session[:user_id] = @user.id
+    redirect '/instagram_images'
+  else
+    erb :index
+  end
 end
 
-get '/signup' do
-
-  erb :'/upload'
-end
 
 post '/signup' do
-  @user = User.create!(
+  @user = User.new(
     username: params[:username],
+    email: params[:email],
     password: params[:password]
   )
-  redirect '/upload'
+
+  if @user.save
+    session[:user_id] = @user.id
+    redirect '/instagram_images'
+  else
+    erb :index
+  end
 end
 
 post "/login" do
