@@ -1,6 +1,5 @@
 # A sample Gemfile
 source "https://rubygems.org"
-ruby '2.0.0'
 
 gem 'rake'
 gem 'activesupport'
@@ -25,7 +24,5 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pry'
-  gem 'shotgun'
   gem 'pg'
 end
