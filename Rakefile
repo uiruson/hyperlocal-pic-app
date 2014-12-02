@@ -8,12 +8,16 @@ Rake::Task["db:drop"].clear
 # NOTE: Assumes SQLite3 DB
 desc "create the database"
 task "db:create" do
-  # touch 'db/db.sqlite3'
+  if development?
+    touch 'db/db.sqlite3'
+  end
 end
 
 desc "drop the database"
 task "db:drop" do
-  # rm_f 'db/db.sqlite3'
+  if development?
+    rm_f 'db/db.sqlite3'
+  end
 end
 
 desc 'Retrieves the current schema version number'

@@ -1,4 +1,3 @@
-
 require 'exifr'
 require 'instagram'
 require 'geo-distance'
@@ -41,7 +40,7 @@ helpers do
     geolocationHash[:origins].push(origin)
     geolocationHash[:markers] = []
     geolocationHash[:images] = []
-    for media_item in Instagram.media_search(lat1, lon1, {:count => 15, :distance => 1200})
+    for media_item in Instagram.media_search(lat1, lon1, {:count => 18, :distance => 1200})
       lat2 = media_item.location.latitude
       lon2 = media_item.location.longitude
       temphash = {}
@@ -129,14 +128,12 @@ post '/upload' do
       exif = EXIFR::JPEG.new('public/' + file_path)
       @latitude = exif.gps.latitude
       @longitude = exif.gps.longitude
-      # binding.pry
       @picture_creds = Picture.create(
         photo_path: file_path,
         user_id: session[:user_id],
         latitude: @latitude,
         longitude: @longitude
       )
-      # binding.pry
       redirect'/instagram_images'
     else
       flash[:message] = "**UPLOAD FAILED**<br/>Your picture doesn't have any GPS data !"
