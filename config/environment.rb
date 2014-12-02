@@ -6,7 +6,7 @@ require 'active_support/all'
 # Load Sinatra Framework (with AR)
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'pry' if development?
+
 require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
