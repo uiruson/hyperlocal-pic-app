@@ -150,8 +150,12 @@ post '/upload' do
 end
 
 get '/instagram_images' do
-  pic = Picture.last
-  click_picture(pic)
+  if Picture.count > 0
+    pic = Picture.last
+    click_picture(pic)
+  else
+    erb :'/main'
+  end
 end
 
 get '/instagram_images/:id' do

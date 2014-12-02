@@ -42,15 +42,15 @@ require APP_ROOT.join('config', 'database')
 #   :port => 5432
 # )
 
-# ActiveRecord::Base.establish_connection(
-#   :adapter  => 'postgresql',
-#   :host     => 'ec2-54-163-248-144.compute-1.amazonaws.com',
-#   :username => 'czliyfcqxaehod',
-#   :password => 'sSkIzOzaJRHIuIdOs0Se9ypgf_',
-#   :database => 'd8l9o8p3jie214',
-#   :encoding => 'unicode',
-#   :port => 5432
-# )
+ActiveRecord::Base.establish_connection(
+  :adapter  => 'postgresql',
+  :host     => 'ec2-54-163-255-191.compute-1.amazonaws.com',
+  :username => 'lwygkihhlhqlqa',
+  :password => '6yJq5CdBbBzU-Qy_aa9EHcYb4w',
+  :database => 'dburpdce044j2i',
+  :encoding => 'utf8',
+  :port => 5432
+)
 
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
