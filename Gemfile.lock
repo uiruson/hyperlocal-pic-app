@@ -40,6 +40,7 @@ GEM
     minitest (5.4.3)
     multi_json (1.9.2)
     multipart-post (2.0.0)
+    pg (0.17.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -101,6 +102,7 @@ DEPENDENCIES
   instagram
   json
   mini_magick
+  pg
   pry
   puma
   rake
