@@ -4,7 +4,8 @@ Hyperlocal Pic App
 <a href="https://hyperlocal-pic-app.herokuapp.com/" target="_blank">hyperlocal-pic-app.herokuapp.com</a>
 
 ## About 
-Hyperlocal is a Sinatra app which allows user to upload a photo and discover nearby photos of interest within certain range
+Hyperlocal is a Sinatra app which allows user to upload a photo and discover nearby photos of interest within certain range.
+App is currently a work in progress.
 
 Technology Stack:
 
