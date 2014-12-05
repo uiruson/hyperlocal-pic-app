@@ -1,4 +1,3 @@
-require 'pry'
 require 'exifr'
 require 'instagram'
 require 'geo-distance'
@@ -41,7 +40,7 @@ helpers do
     geolocationHash[:origins].push(origin)
     geolocationHash[:markers] = []
     geolocationHash[:images] = []
-    for media_item in Instagram.media_search(lat1, lon1, {:count => 15, :distance => 1200})
+    for media_item in Instagram.media_search(lat1, lon1, {:count => 18, :distance => 1200})
       lat2 = media_item.location.latitude
       lon2 = media_item.location.longitude
       temphash = {}
@@ -64,14 +63,7 @@ helpers do
     @html << "</div></div>"
 
     gon.your_json = geolocationHash.to_json
-    # File.open(File.join(__dir__, "/../public/javascript/location.json"),"w+") do |f|
-    #   f.write(geolocationHash.to_json)
-    #   f.close
-    # end
     erb :'/main'
-    # if session[:message] != ""
-    #   session[:message] == ""
-    # end
   end
 end
 
@@ -79,21 +71,30 @@ get '/' do
   erb :index
 end
 
-get '/login' do
-  redirect '/instagram_images/'
+post '/login' do
+  @user = User.where(username: params[:username]).first
+  if @user && params[:password] == @user.password
+    session[:user_id] = @user.id
+    redirect '/instagram_images'
+  else
+    erb :index
+  end
 end
 
-get '/signup' do
-
-  erb :'/upload'
-end
 
 post '/signup' do
-  @user = User.create!(
+  @user = User.new(
     username: params[:username],
+    email: params[:email],
     password: params[:password]
   )
-  redirect '/upload'
+
+  if @user.save
+    session[:user_id] = @user.id
+    redirect '/instagram_images'
+  else
+    erb :index
+  end
 end
 
 post "/login" do
@@ -129,14 +130,12 @@ post '/upload' do
       exif = EXIFR::JPEG.new('public/' + file_path)
       @latitude = exif.gps.latitude
       @longitude = exif.gps.longitude
-      # binding.pry
       @picture_creds = Picture.create(
         photo_path: file_path,
         user_id: session[:user_id],
         latitude: @latitude,
         longitude: @longitude
       )
-      # binding.pry
       redirect'/instagram_images'
     else
       flash[:message] = "**UPLOAD FAILED**<br/>Your picture doesn't have any GPS data !"
@@ -150,8 +149,12 @@ post '/upload' do
 end
 
 get '/instagram_images' do
-  pic = Picture.last
-  click_picture(pic)
+  if Picture.count > 0
+    pic = Picture.last
+    click_picture(pic)
+  else
+    erb :'/main'
+  end
 end
 
 get '/instagram_images/:id' do

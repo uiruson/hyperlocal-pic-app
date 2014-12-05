@@ -47,24 +47,40 @@
     <h2 id="yourPhotos">YOUR PHOTOS</h2>
     <div class="row">
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @recent_pic_upload.id %>" id="userImg-<%= @recent_pic_upload.id %>">
-          <img src="/<%= @recent_pic_upload.photo_path %>"  class="thumbnail img-responsive" >
-        </a>
+        <% if !@recent_pic_upload.nil? %>
+          <a href="/instagram_images/<%= @recent_pic_upload.id %>" id="userImg-<%= @recent_pic_upload.id %>">
+            <img src="/<%= @recent_pic_upload.photo_path %>"  class="thumbnail img-responsive" >
+          </a>
+        <% else %>
+            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
+        <% end %>
       </div>
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @secondlast_upload.id %>" id="userImg-<%= @secondlast_upload.id %>">
-          <img src="/<%= @secondlast_upload.photo_path %>"  class="thumbnail img-responsive">
-        </a>
+        <% if !@secondlast_upload.nil? %>
+          <a href="/instagram_images/<%= @secondlast_upload.id %>" id="userImg-<%= @secondlast_upload.id %>">
+            <img src="/<%= @secondlast_upload.photo_path %>"  class="thumbnail img-responsive">
+          </a>
+        <% else %>
+            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
+        <% end %>
       </div>
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @thirdlast_upload.id %>" id="userImg-<%= @thirdlast_upload.id %>">
-          <img src="/<%= @thirdlast_upload.photo_path %>"  class="thumbnail img-responsive">
-        </a>
+        <% if !@thirdlast_upload.nil? %>
+          <a href="/instagram_images/<%= @thirdlast_upload.id %>" id="userImg-<%= @thirdlast_upload.id %>">
+            <img src="/<%= @thirdlast_upload.photo_path %>"  class="thumbnail img-responsive">
+          </a>
+         <% else %>
+            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
+        <% end %>
       </div>
       <div class="col-md-3">
-        <a href="/instagram_images/<%= @fourthlast_upload.id %>" id="userImg-<%= @fourthlast_upload.id %>">
-          <img src="/<%= @fourthlast_upload.photo_path %>"  class="thumbnail img-responsive">
-        </a>
+        <% if !@fourthlast_upload.nil? %>
+          <a href="/instagram_images/<%= @fourthlast_upload.id %>" id="userImg-<%= @fourthlast_upload.id %>">
+            <img src="/<%= @fourthlast_upload.photo_path %>"  class="thumbnail img-responsive">
+          </a>
+         <% else %>
+            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
+        <% end %>
       </div>
     </div>
   </div><!--END OF THE USER'S PICTURE CONTAINER-->

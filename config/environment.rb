@@ -6,7 +6,7 @@ require 'active_support/all'
 # Load Sinatra Framework (with AR)
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'pry'
+
 require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
@@ -30,6 +30,17 @@ end
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+# db = URI.parse('postgres://postgres:postgres@localhost:5432/hyperlocal')
+
+ActiveRecord::Base.establish_connection(
+  :adapter  => 'postgresql',
+  :host     => 'ec2-54-163-255-191.compute-1.amazonaws.com',
+  :username => 'lwygkihhlhqlqa',
+  :password => '6yJq5CdBbBzU-Qy_aa9EHcYb4w',
+  :database => 'dburpdce044j2i',
+  :encoding => 'utf8',
+  :port => 5432
+)
 
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
