@@ -11,6 +11,7 @@ require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
+SECRETS = YAML.load_file( File.join(Sinatra::Application.root, '', 'secrets.yml') )
 
 # Sinatra configuration
 configure do
@@ -20,9 +21,8 @@ configure do
   enable :sessions
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
 
-  secrets = YAML.load_file( File.join(Sinatra::Application.root, 'config', 'secrets.yml') )
-  set :instagram_id, secrets['instagram']['id']
-  set :instagram_secret, secrets['instagram']['secret']
+  set :instagram_id, SECRETS['instagram']['id']
+  set :instagram_secret, SECRETS['instagram']['secret']
 
   set :views, File.join(Sinatra::Application.root, "app", "views")
   Sinatra::register Gon::Sinatra
@@ -30,14 +30,12 @@ end
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
-# db = URI.parse('postgres://postgres:postgres@localhost:5432/hyperlocal')
-
 ActiveRecord::Base.establish_connection(
   :adapter  => 'postgresql',
-  :host     => 'ec2-54-163-255-191.compute-1.amazonaws.com',
-  :username => 'lwygkihhlhqlqa',
-  :password => '6yJq5CdBbBzU-Qy_aa9EHcYb4w',
-  :database => 'dburpdce044j2i',
+  :host     => SECRETS['database']['host'],
+  :username => SECRETS['database']['username'],
+  :password => SECRETS['database']['password'],
+  :database => SECRETS['database']['db'],
   :encoding => 'utf8',
   :port => 5432
 )
