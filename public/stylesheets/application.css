@@ -147,6 +147,11 @@ button::-moz-focus-inner {
   background-color: #699B99;
 }
 
+#signedIn{
+  padding: 15px;
+  color: #fee268;
+}
+
 #upload-signout-navbar li a{
   color: #fee268;
 }
@@ -219,6 +224,19 @@ button::-moz-focus-inner {
 
 #userPhotosContainer, #mapContainer, #instagramImagesContainer{
   padding-bottom: 55px;
+}
+
+.img-placeholder{
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: border .2s ease-in-out;
+  -o-transition: border .2s ease-in-out;
+  transition: border .2s ease-in-out;
 }
 
 #instagramImagesContainer span{

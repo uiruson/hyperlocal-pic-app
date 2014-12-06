@@ -4,6 +4,7 @@ require 'geo-distance'
 require 'gon-sinatra'
 require 'json'
 require 'sinatra/flash'
+require 'pry'
 
 enable :sessions
 
@@ -13,33 +14,51 @@ helpers do
       @current_user = User.find(session[:user_id])
     end
   end
-  def click_picture(pic)
-    @recent_pic_upload = Picture.last
-    @secondlast_upload = Picture.all[-2]
-    @thirdlast_upload = Picture.all[-3]
-    @fourthlast_upload = Picture.all[-4]
+
+  def click_picture(userPic)
+    if current_user
+      @user = @current_user
+      @pictures = Picture.where(user_id: @user.id)
+
+      if @pictures.length >= 4 
+        @pictures = Picture.where(user_id: @user.id).order('created_at desc').limit(4)
+      elsif @pictures.length < 4
+        @pictures = @pictures.order("created_at desc")
+
+        while ( @pictures.length < 4)
+          @pic = Picture.new(user_id: @user.id, photo_path: '/images/placeholder.png')
+          @pictures.unshift(@pic)
+        end
+
+      end
+    end
+    # @recent_pic_upload = Picture.last
+    # @secondlast_upload = Picture.all[-2]
+    # @thirdlast_upload = Picture.all[-3]
+    # @fourthlast_upload = Picture.all[-4]
+    @descending_location = []
+    geolocationHash = {}
+    origin = {}
  
     Instagram.configure do |config|
       config.client_id = settings.instagram_id
       config.client_secret = settings.instagram_secret
     end
-    # binding.pry
-    lat1 = pic.latitude
-    lon1 = pic.longitude
-
+    
+    
     @html = "<div class='container' id='instagramImagesContainer'>"
     @html << "<h2>LIST OF NEARBY IMAGES</h2><div class='row'>"
 
-
-    @descending_location = []
-    geolocationHash = {}
-    origin = {}
+    lat1 = userPic.latitude
+    lon1 = userPic.longitude
+  
+    geolocationHash[:origins] = []
     origin["latitude"] = lat1
     origin["longitude"] = lon1
-    geolocationHash[:origins] = []
     geolocationHash[:origins].push(origin)
     geolocationHash[:markers] = []
     geolocationHash[:images] = []
+
     for media_item in Instagram.media_search(lat1, lon1, {:count => 18, :distance => 1200})
       lat2 = media_item.location.latitude
       lon2 = media_item.location.longitude
@@ -99,9 +118,11 @@ end
 
 post "/login" do
   @user = User.where(username: params[:username], password: params[:password]).first
+  binding.pry
   if @user
     session[:user_id] = @user.id
-    redirect '/upload'
+    binding.pry
+    redirect '/instagram_images'
   else
     return "invalid username or password"
   end
@@ -149,11 +170,15 @@ post '/upload' do
 end
 
 get '/instagram_images' do
-  if Picture.count > 0
-    pic = Picture.last
-    click_picture(pic)
+  if current_user 
+    if Picture.count > 0
+      pic = Picture.last
+      click_picture(pic)
+    else
+      erb :'/main'
+    end
   else
-    erb :'/main'
+    erb :index
   end
 end
 

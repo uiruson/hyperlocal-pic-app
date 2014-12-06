@@ -5,6 +5,9 @@
     <div class="container-fluid">
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+          <li id="signedIn">SIGNED IN AS  : <%= @user.email %></li>
+        </ul>
         <ul id="upload-signout-navbar" class="nav navbar-nav navbar-right">
           <li id="upload-panel-button"><a href="#"  class="pull-me">UPLOAD PHOTO</a></li>
           <li><a href="/logout">SIGN OUT</a></li>
@@ -46,42 +49,23 @@
   <div class="container" id="userPhotosContainer">
     <h2 id="yourPhotos">YOUR PHOTOS</h2>
     <div class="row">
-      <div class="col-md-3">
-        <% if !@recent_pic_upload.nil? %>
-          <a href="/instagram_images/<%= @recent_pic_upload.id %>" id="userImg-<%= @recent_pic_upload.id %>">
-            <img src="/<%= @recent_pic_upload.photo_path %>"  class="thumbnail img-responsive" >
+      <% @pictures.each do |picture| %>
+       <div class="col-md-3">
+        <% if !picture.id.nil? %>
+          <a href="/instagram_images/<%= picture.id %>" id="userImg-<%= picture.id %>">
+            <img src="/<%= picture.photo_path %>"  class="thumbnail img-responsive" >
           </a>
         <% else %>
-            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
+          <img src="<%= picture.photo_path %>"  class="img-placeholder img-responsive" >
         <% end %>
-      </div>
-      <div class="col-md-3">
-        <% if !@secondlast_upload.nil? %>
-          <a href="/instagram_images/<%= @secondlast_upload.id %>" id="userImg-<%= @secondlast_upload.id %>">
-            <img src="/<%= @secondlast_upload.photo_path %>"  class="thumbnail img-responsive">
-          </a>
-        <% else %>
-            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
-        <% end %>
-      </div>
-      <div class="col-md-3">
-        <% if !@thirdlast_upload.nil? %>
-          <a href="/instagram_images/<%= @thirdlast_upload.id %>" id="userImg-<%= @thirdlast_upload.id %>">
-            <img src="/<%= @thirdlast_upload.photo_path %>"  class="thumbnail img-responsive">
-          </a>
-         <% else %>
-            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
-        <% end %>
-      </div>
-      <div class="col-md-3">
-        <% if !@fourthlast_upload.nil? %>
-          <a href="/instagram_images/<%= @fourthlast_upload.id %>" id="userImg-<%= @fourthlast_upload.id %>">
-            <img src="/<%= @fourthlast_upload.photo_path %>"  class="thumbnail img-responsive">
-          </a>
-         <% else %>
-            <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
-        <% end %>
-      </div>
+       </div>
+      <% end %>
+
+
+     <!--    <div class="col-md-3">
+          <img src="/images/placeholder.png"  class="img-placeholder img-responsive" >
+         </div> -->
+
     </div>
   </div><!--END OF THE USER'S PICTURE CONTAINER-->
   

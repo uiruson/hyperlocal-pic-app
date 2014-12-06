@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <a class="navbar-brand"  href="#" style="float: right" >
         <button id="arrow-button" type="submit" class="btn btn-default" name="">
-          <span id="right-panel-link" href= "#right-panel"  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span id="right-panel-link" href= "#right-panel"  class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         </button>
       </a>
     </div>
@@ -17,31 +17,31 @@
     </button>
 
 
-    <form id="right-panel-login" action='/instagram_images' method="GET">
+    <form id="right-panel-login" action='/login' method="POST">
       <div class="form-group">
         <label>USERNAME</label>
-        <input type="text" class="form-control" id="username" placeholder="Username" value="">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="">
       </div>
       <div class="form-group">
         <label>PASSWORD</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" value="">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="">
       </div>
       <button type="submit" id="login-button" class="ghost side-button">
       LOGIN</button>   
     </form>
 
-    <form id="right-panel-register">
+    <form id="right-panel-register" method="POST" action="/signup">
       <div class="form-group">
         <label>USERNAME</label>
-        <input type="text" class="form-control" id="username" placeholder="Username" value="">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="">
       </div>
       <div class="form-group">
         <label>EMAIL</label>
-        <input type="email" class="form-control" id="email" placeholder="Email" value="">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="">
       </div>
       <div class="form-group">
         <label>PASSWORD</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" value="">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="">
       </div>
       <button type="submit" id="sign-up" class="ghost side-button">SIGN UP</button>   
     </form>
