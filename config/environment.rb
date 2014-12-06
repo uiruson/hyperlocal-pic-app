@@ -13,6 +13,7 @@ APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
 SECRETS = YAML.load_file( File.join(Sinatra::Application.root, '', 'secrets.yml') )
 
+
 # Sinatra configuration
 configure do
   set :root, APP_ROOT.to_path
@@ -20,6 +21,7 @@ configure do
 
   enable :sessions
   set :session_secret, ENV['SESSION_KEY'] || 'lighthouselabssecret'
+
 
   set :instagram_id, SECRETS['instagram']['id']
   set :instagram_secret, SECRETS['instagram']['secret']

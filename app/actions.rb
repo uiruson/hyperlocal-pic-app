@@ -4,7 +4,6 @@ require 'geo-distance'
 require 'gon-sinatra'
 require 'json'
 require 'sinatra/flash'
-require 'pry'
 
 enable :sessions
 
@@ -44,7 +43,6 @@ helpers do
       config.client_id = settings.instagram_id
       config.client_secret = settings.instagram_secret
     end
-    
     
     @html = "<div class='container' id='instagramImagesContainer'>"
     @html << "<h2>LIST OF NEARBY IMAGES</h2><div class='row'>"
@@ -118,7 +116,6 @@ end
 
 post "/login" do
   @user = User.where(username: params[:username], password: params[:password]).first
-  binding.pry
   if @user
     session[:user_id] = @user.id
     binding.pry
