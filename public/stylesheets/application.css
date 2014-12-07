@@ -34,6 +34,7 @@ button::-moz-focus-inner {
 
 /*GHOST BUTTONS */
 .ghost {
+  background-color: transparent;
   font-size: 1em;
   letter-spacing: 0.1em;
   color:#ffffff;
@@ -51,10 +52,10 @@ button::-moz-focus-inner {
 
 #enter.ghost:hover,
 #enter.ghost:active {
-  color: #000;
-  border-color: #000;
-  transition: color 0.3s ease-in,
-              border-color 0.3s ease-in;
+  color: lightgrey;
+  border-color: lightgrey;
+  transition: color 0.5s ease-in,
+  border-color 0.5s ease-in;
 }
 /* EXTRA STYLING FOR SIDE BUTTON TO LOGIN OR REGISTER */
 .ghost.side-button:hover,
@@ -117,7 +118,7 @@ button::-moz-focus-inner {
   color: #699B99;
   border-color: #fff;
   transition: color 0.3s ease-in,
-              border-color 0.3s ease-in;
+  order-color 0.3s ease-in;
 }
 
 #right-panel-register{
@@ -209,6 +210,20 @@ button::-moz-focus-inner {
   border: 7px solid white;
   margin: 0px;
   padding: 0px
+}
+
+#pleaseUploadMessage h3{
+  background-color: #8DC694;
+  padding: 30px;
+  text-align: center;
+  color: white;
+}
+
+#errorMessage h3{
+  background-color: #ff7a82;
+  padding: 30px;
+  text-align: center;
+  color: white;
 }
 
 #panel {

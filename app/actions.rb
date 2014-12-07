@@ -14,7 +14,7 @@ helpers do
     end
   end
 
-  def click_picture(userPic)
+  def get_stored_pictures(id)
     if current_user
       @user = @current_user
       @pictures = Picture.where(user_id: @user.id)
@@ -26,17 +26,28 @@ helpers do
 
         while ( @pictures.length < 4)
           @pic = Picture.new(user_id: @user.id, photo_path: '/images/placeholder.png')
-          @pictures.unshift(@pic)
+          @pictures.push(@pic)
         end
+      end
 
+      if !id.nil?
+        display_instagram_pics(id) if @user.pictures.count > 0
       end
     end
-    # @recent_pic_upload = Picture.last
-    # @secondlast_upload = Picture.all[-2]
-    # @thirdlast_upload = Picture.all[-3]
-    # @fourthlast_upload = Picture.all[-4]
+  end
+
+  def temporary_map
+    # gon.your_json = geolocationHash.to_json
+    # 49.283139, -123.120488
+  end
+
+  def display_instagram_pics(id)
+    selectedPic = current_user.pictures.where(id: id).first
     @descending_location = []
     geolocationHash = {}
+    geolocationHash[:origins] = []
+    geolocationHash[:markers] = []
+    geolocationHash[:images] = []
     origin = {}
  
     Instagram.configure do |config|
@@ -47,17 +58,13 @@ helpers do
     @html = "<div class='container' id='instagramImagesContainer'>"
     @html << "<h2>LIST OF NEARBY IMAGES</h2><div class='row'>"
 
-    lat1 = userPic.latitude
-    lon1 = userPic.longitude
-  
-    geolocationHash[:origins] = []
+    lat1 = selectedPic.latitude
+    lon1 = selectedPic.longitude
     origin["latitude"] = lat1
     origin["longitude"] = lon1
     geolocationHash[:origins].push(origin)
-    geolocationHash[:markers] = []
-    geolocationHash[:images] = []
 
-    for media_item in Instagram.media_search(lat1, lon1, {:count => 18, :distance => 1200})
+    for media_item in Instagram.media_search(lat1, lon1, {:count => 15, :distance => 1200})
       lat2 = media_item.location.latitude
       lon2 = media_item.location.longitude
       temphash = {}
@@ -88,11 +95,22 @@ get '/' do
   erb :index
 end
 
+get '/main' do 
+  if current_user
+    get_stored_pictures(nil)
+    erb :'/main'
+  end
+end
+
 post '/login' do
   @user = User.where(username: params[:username]).first
   if @user && params[:password] == @user.password
     session[:user_id] = @user.id
-    redirect '/instagram_images'
+    if @user.pictures.count > 0
+      redirect "/instagram_images/#{@user.pictures.last.id}"
+    else
+      redirect '/main'
+    end
   else
     erb :index
   end
@@ -100,34 +118,27 @@ end
 
 
 post '/signup' do
-  @user = User.new(
-    username: params[:username],
-    email: params[:email],
-    password: params[:password]
-  )
+  @user = params[:username] ? User.new(username: params[:username],email: params[:email],password: params[:password]) : User.new_guest
 
   if @user.save
+    #current_user.move_to(@user) if current_user && current_user.is_guest?
     session[:user_id] = @user.id
-    redirect '/instagram_images'
+    redirect '/main'
   else
     erb :index
   end
-end
 
-post "/login" do
-  @user = User.where(username: params[:username], password: params[:password]).first
-  if @user
-    session[:user_id] = @user.id
-    binding.pry
-    redirect '/instagram_images'
-  else
-    return "invalid username or password"
-  end
 end
 
 get '/logout' do
-  session.clear
-  redirect '/'
+  if !current_user.is_guest?
+    session.clear
+    redirect '/'
+  else
+    User.destroy(current_user.id)
+    session.clear
+    redirect '/'
+  end
 end
 
 get '/upload' do
@@ -154,34 +165,31 @@ post '/upload' do
         latitude: @latitude,
         longitude: @longitude
       )
-      redirect'/instagram_images'
+      redirect "/instagram_images/#{current_user.pictures.last.id}"
     else
-      flash[:message] = "**UPLOAD FAILED**<br/>Your picture doesn't have any GPS data !"
-      redirect '/instagram_images'
+      if current_user.pictures.count > 0
+        flash[:message] = "**UPLOAD FAILED**<br/>Your picture doesn't have any GPS data !"
+        redirect "/instagram_images/#{current_user.pictures.last.id}"
+      else
+        flash[:message] = "**UPLOAD FAILED**<br/>Your picture doesn't have any GPS data !"
+        redirect "/main"
+      end
     end
   else
-    flash[:message] = "**UPLOAD FAILED**<br/>You need to upload a jpg file"
-    redirect '/instagram_images'
+    if current_user.pictures.count > 0
+      flash[:message] = "**UPLOAD FAILED**<br/>You need to upload a jpg file"
+      redirect "/instagram_images/#{current_user.pictures.last.id}"
+    else
+      flash[:message] = "**UPLOAD FAILED**<br/>You need to upload a jpg file"
+      redirect '/main'
+    end
   end
   erb :'/main'
 end
 
-get '/instagram_images' do
-  if current_user 
-    if Picture.count > 0
-      pic = Picture.last
-      click_picture(pic)
-    else
-      erb :'/main'
-    end
-  else
-    erb :index
-  end
-end
 
 get '/instagram_images/:id' do
-  pic = Picture.find(params[:id])
-  click_picture(pic)
+  get_stored_pictures(params[:id])
 end
 
 
