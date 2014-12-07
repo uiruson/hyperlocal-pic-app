@@ -63,20 +63,19 @@ button::-moz-focus-inner {
   color: #f0f20b;
   border-color: #f0f20b;
   transition: color 0.3s ease-in,
-              border-color 0.3s ease-in;
+  border-color 0.3s ease-in;
 }
 
 /* ARROW BUTTON */
 #arrow-button {
-  background-color: #699B99;
+  background-color: transparent;
   border: none;
 }
 
-#arrow-button > span {
+#arrow-button span {
   color: yellow;
   font-size: 1.5em;
 }
-
 
 /* STYLING FOR REGISTER/LOGIN SIDE PANEL */
 .panel {
@@ -97,8 +96,20 @@ button::-moz-focus-inner {
   color: #000 !important;
   background-color: #000 !important;
   border: none;
+  font-size: 12px;
+  margin-top: 12px;
   width: 100%;
 }
+
+#backto-login-button {
+  color: #000 !important;
+  background-color: #000 !important;
+  border: none;
+  font-size: 12px;
+  margin-top: 12px;
+  width: 100%;
+}
+
 /* link to register if new user -color of the text in the button*/
 #register {
   text-decoration: none !important;

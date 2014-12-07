@@ -12,11 +12,7 @@
 
   <!---BEGINNING OF RIGHT SLIDING PANEL FOR LOGIN/REGISTER-->
   <div id="right-panel" class="panel">
-    <button id="register-button">
-      <a><em><span id="register" href="#">New user? Register</span></em></a>
-    </button>
-
-
+   
     <form id="right-panel-login" action='/login' method="POST">
       <div class="form-group">
         <label>USERNAME</label>
@@ -29,6 +25,9 @@
       <button type="submit" id="login-button" class="ghost side-button">
       LOGIN</button>   
     </form>
+    <button id="register-button">
+      <span style="color:white;">Need an account? </span><a><span id="register" href="#">Sign Up</span></a>
+    </button>
 
     <form id="right-panel-register" method="POST" action="/signup">
       <div class="form-group">
@@ -45,6 +44,9 @@
       </div>
       <button type="submit" id="sign-up" class="ghost side-button">SIGN UP</button>   
     </form>
+    <button id="backto-login-button">
+      <span style="color:white;">Already have an account? </span><a><span id="backToLogin" href="#">Login</span></a>
+    </button>
   </div><!--END OF THE RIGHT SLIDING PANEL-->
 
   <!--LANDING PAGE -->

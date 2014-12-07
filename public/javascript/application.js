@@ -9,6 +9,7 @@ $(function() {
  }
  
  $('#right-panel-register').css({display : "none"});
+ $('#backto-login-button').hide();
  $('#right-panel-link').panelslider({side: 'right', clickClose: false, duration: 500 });
   //clicking on register in the side panel shows the registration form
   // and makes the login form disappear
@@ -16,14 +17,22 @@ $(function() {
     $('#right-panel-login').css({display : "none"});
     $('#right-panel-register').css({display : "block"});
     $('#register-button').hide();
+    $('#backto-login-button').show();
+  });
+
+  $('#backToLogin').on('click', function(){
+    $('#right-panel-login').css({display : "block"});
+    $('#right-panel-register').css({display : "none"});
+    $('#backto-login-button').hide();
+    $('#register-button').show();
   });
 
   $('#upload-panel-button').on('click', function(){
      var uploadPanel = $('.upload-panel');
      if (uploadPanel.is(':hidden')) {
       var height = $('.upload-panel').outerHeight(true);
-      $('#second-page').animate({'margin-top': height+'px'}, 1000);
-      uploadPanel.slideDown(1000);
+      $('#second-page').animate({'margin-top': height+'px'}, 00);
+      uploadPanel.slideDown(800);
       $(this).css({display : "none"})
 
      }
